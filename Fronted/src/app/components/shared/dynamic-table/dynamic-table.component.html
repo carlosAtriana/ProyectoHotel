@@ -1,21 +1,4 @@
 <div class="p-mt-2">
-    <table>
-        <thead>
-            <tr>
-                <ng-container *ngFor="let header of title">
-                    <th>{{ header }}</th>
-                </ng-container>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of body">
-                <ng-container *ngFor="let field of title">
-                    <td>{{ item[field] }}</td>
-                </ng-container>
-            </tr>
-        </tbody>
-    </table>
-</div>
 
 <div mt-1>
     <p-table [value]="body" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
