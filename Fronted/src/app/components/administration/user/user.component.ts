@@ -10,10 +10,13 @@ import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.
 })
 export class UserComponent {
 
-  title:any[] = ['name', 'apellido', 'sexo']
+  title:any[] = ['nombre', 'apellido', 'sexo']
 
   body: any = [
-      {name: 'hola', apellido: 'dsd', sexo: 'masculino'}
+      {nombre: 'Carlos', apellido: 'Triana', sexo: 'masculino'},
+      {nombre: 'Juana', apellido: 'Martinez', sexo: 'femenino'},
+      {nombre: 'SOfia', apellido: 'Gonzales', sexo: 'femenino'},
+      {nombre: 'Jancho ', apellido: 'Piñeres', sexo: 'Masculino'},
   ]
  
 }

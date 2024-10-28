@@ -1,9 +1,9 @@
 <div class="p-mt-2">
 
 <div mt-1>
-    <p-table [value]="body" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
-        [globalFilterFields]="['tipoActivo.nombre','nombre', 'descripcionUbicacion']" [autoLayout]="true"
-        [showCurrentPageReport]="true"
+    <p-table ngFor="let body of data" [columns]="title" [value]="body" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
+        (globalFilterFields)="body" [autoLayout]="true"
+        [showCurrentPageReport]="true" [responsive]="true"
         currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
         <ng-template pTemplate="caption">
             <div style="text-align:right; max-width: 100%; width: 100%;">
@@ -14,19 +14,18 @@
                 </span>
             </div>
         </ng-template>
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header" let-title>
             <tr>
-                @for (item of title; track $index) {
-                <th class="text-center">{{item}} <p-columnFilter type="text" field="nombre"
-                        display="menu"></p-columnFilter></th>
-                }
+                <ng-container *ngFor="let field of title">
+                    <th>{{field}}</th>
+                </ng-container>             
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-activo>
-            <tr *ngFor="let item of body">
+        <ng-template pTemplate="body" let-body>
+            <tr >
                 <ng-container *ngFor="let field of title">
-                    <td class="text-center">{{ item[field] }}</td>
+                    <td >{{ body[field] }}</td>
                 </ng-container>
             </tr>
         </ng-template>
