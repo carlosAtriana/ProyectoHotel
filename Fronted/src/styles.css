@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+/*aca se le puede cambiar el color del fondo al nav-menu*/
+.custom-menubar {
+    border: none;
+    background-color: rgb(32, 54, 39);
+}
+
+
+/*modificar el color del texto de la opciones del nav-menu*/
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
+    color: #ffffff;
+}
+
+
+/*estilos para el sidebar*/
+.p-sidebar-custom{
+    position: fixed;
+    position: relative !important; /* Cambia de fixed o absolute a relative */
+    z-index: 1 !important;
+    box-shadow: none; /* Opcional: eliminar la sombra */
+    border-right: 1px solid #ccc;
+    width: 250px;
+    height: 100vh;
+    transition: width 1s ease;
+    background-color: rgb(32, 54, 39);
+
+  }
+  
+  /*esto le coloca color a la opcion que esta activa*/
+  .active.text-600 {
+    background-color: #292f53;
+    color: white !important;  
+  }
+  
+ .font-medium{
+  color: #fff;
+ }
+
+ .pi{
+  color: #fff;
+ }
+  
+  /*Hover para items que no son activos*/
+  .items-sidebar:not(.active):hover{
+    background-color: rgb(224, 210, 210);
+  }
+
+  
+  /*estilo para el boton de cerrar el sidebar*/
+  .button-close-sidebar{
+    margin: 0%;
+    border: none;
+    left: 12px;
+  }
+  .button-close-sidebar:hover{
+    background-color: #292f53;
+    color: #fff !important;
+  }
+  
+  /*estilos para el titulo del sidebar*/
+  .textTitle{
+    color: #292f53;
+    font-size: 20px;
+  }
+
+  /* estilos para cuando se le da cerrar al sidebar */
+    
+  .sidebar-collapsed{
+    position: fixed;
+    position: relative !important; /* Cambia de fixed o absolute a relative */
+    z-index: 1 !important;
+    box-shadow: none; /* Opcional: eliminar la sombra */
+    border-right: 1px solid #ccc;
+    width: 60px; 
+    height: 100vh;
+    transition: width 0.3s ease;
+    background-color: rgb(32, 54, 39);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  } 
+
+  .logo{
+    width: 40px;
+    height: 40px;
+    border-radius: 120px;
+  }
+
+  
+
+
+
+

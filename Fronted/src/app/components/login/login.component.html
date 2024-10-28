@@ -1,0 +1,40 @@
+<div class="container-form bg-gray-900">
+    <div class="flex align-items-center justify-content-center min-h-screen">
+        <form [formGroup]="formulario" (ngSubmit)="loguear()">
+            <div class="surface-card p-4 shadow-2 border-round w-full sm:w-25rem">
+                <div class="text-center mb-5">
+                    <img src="assets/logoHotel.webp" alt="Logo" height="50" class="mb-3">
+                    <div class="text-900 text-3xl font-medium mb-3">Iniciar sesión</div>
+                </div>
+
+                <div>
+                    <div class="mb-3">
+                        <label for="username" class="block text-900 font-medium mb-2">Usuario</label>
+                        <input formControlName="usuario" id="username" type="text" pInputText
+                            class="w-full p-inputtext-sm p-3" placeholder="Ingrese su usuario" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="block text-900 font-medium mb-2">Contraseña</label>
+                        <input formControlName="clave" id="password" type="password" pInputText
+                            class="w-full p-inputtext-sm p-3" placeholder="Ingrese su contraseña" />
+                    </div>
+
+                    <div class="flex align-items-center justify-content-between mb-4">
+                        <p-checkbox binary="true" label="Recordarme" class="text-600"></p-checkbox>
+                        <a class="cursor-pointer text-600 hover:text-primary transition-colors">
+                            ¿Olvidó su contraseña?
+                        </a>
+                    </div>
+
+                    <div>
+                        <button type="submit" [disabled]="formulario.invalid" pButton label="Iniciar sesión"
+                            class="p-button p-component w-full p-button-primary p-3">
+                            <i class="pi pi-user"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

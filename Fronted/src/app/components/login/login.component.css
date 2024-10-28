@@ -1,0 +1,19 @@
+
+
+.container-form::after {
+  content: ''; /* Necesario para que el pseudo-elemento se muestre */
+  position: absolute; /* Posiciona el pseudo-elemento */
+  top: 0; /* Alineado al top del contenedor */
+  left: 0; /* Alineado a la izquierda del contenedor */
+  right: 0; /* Alineado a la derecha del contenedor */
+  bottom: 0; /* Alineado al fondo del contenedor */
+  background: linear-gradient(135deg, transparent 50%, rgba(223, 32, 32, 0.425) 50%, rgba(63, 63, 63, 0.493) 55%, transparent 55%);
+  z-index: 0; /* Asegúrate de que esté detrás del contenido */
+}
+
+.container-form > * {
+  position: relative; /* Asegúrate de que el contenido esté por encima del pseudo-elemento */
+  z-index: 1; /* Asegura que el contenido se muestre sobre el fondo */
+}
+
+
