@@ -1,8 +1,8 @@
 <div class="p-mt-2">
 
 <div mt-1>
-    <p-table ngFor="let body of data" [columns]="title" [value]="body" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
-        (globalFilterFields)="body" [autoLayout]="true"
+    <p-table  [columns]="title" [value]="body" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
+        (globalFilterFields)="title" [autoLayout]="true"
         [showCurrentPageReport]="true" [responsive]="true"
         currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
         <ng-template pTemplate="caption">

@@ -1,101 +1,250 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+:root {
+  --header-height: 3.5rem;
+  --nav-width: 219px;
+  /*Colores*/
+  --first-color: #6923d0;
+  --first-color: rgb(28, 203, 107);
+  --first-color-light: #1d1b1f;
+  --title-color: #19181b;
+  --text-color: #58555e;
+  --text-color-light: #a5a1aa;
+  --body-color: #181718;
+  --container-color: #0b0b0b;
+  /*fonts*/
+  --body-font: "Poppins", sans-serif;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.75rem;
+  --smaller-font-size: 0.75rem;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --z-fixed: 100;
+}
 
-body{
-    margin: 0;
-    padding: 0;
+@media screen and (min-width: 1024px) {
+  :root {
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
+/*Formateo de pagina*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: var(--header-height) 0 0 0;
+  padding: 1rem 1rem 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+h3 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 
-/*aca se le puede cambiar el color del fondo al nav-menu*/
-.custom-menubar {
-    border: none;
-    background-color: rgb(32, 54, 39);
+/*Header*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--container-color);
+  box-shadow: 0 1px 0 rgba(22, 8, 43, 0.1);
+  padding: 0 1rem;
+  z-index: var(--z-fixed);
+}
+.header__container {
+  display: flex;
+  align-items: center;
+  height: var(--header-height);
+  justify-content: space-between;
+}
+.header__img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 
-/*modificar el color del texto de la opciones del nav-menu*/
-.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #ffffff;
+.header__icon, .header__toggle {
+  font-size: 1.2rem;
+}
+.header__toggle {
+  color: white;
+  cursor: pointer;
 }
 
+/*Sidebar*/
+.nav {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  height: 100vh;
+  padding: 1rem 1rem 0;
+  background-color: var(--container-color);
+  box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+  z-index: var(--z-fixed);
+  transition: 0.4s;
+  /*Dropdown*/
+}
+.nav__container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 3rem;
+  overflow: auto;
+  scrollbar-width: none;
+}
+/* esto es para quitar el scrol */
+.nav__container::-webkit-scrollbar {
+  display: none;
+}
+/* estilos del logo del sidebar */
+.nav__logo {
+  font-weight: var(--font-semi-bold);
+  margin-bottom: 2.5rem;
+}
+.nav__list, .nav__items {
+  display: grid;
+}
+.nav__list {
+  row-gap: 2.5rem;
+}
+.nav__items {
+  row-gap: 1.5rem;
+}
+.nav__subtitle {
+  font-size: var(--normal-font-size);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  color: var(--text-color-light);
+}
+.nav__link {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+}
+.nav__link:hover {
+  color: var(--first-color);
+}
+.nav__icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.nav__name {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+}
+.nav__logout {
+  margin-top: 5rem;
+}
+.nav__dropdown {
+  overflow: hidden;
+  max-height: 21px;
+  transition: 0.4s ease-in-out;
+}
+.nav__dropdown-collapse {
+  background-color: var(--first-color-light);
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+}
+.nav__dropdown-content {
+  display: grid;
+  row-gap: 0.5rem;
+  padding: 0.75rem 2.5rem 0.75rem 1.8rem;
+}
+.nav__dropdown-item {
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-medium);
+  color: var(--text-color);
+}
+.nav__dropdown-item:hover {
+  color: var(--first-color);
+}
+.nav__dropdown-icon {
+  margin-left: auto;
+  transition: 0.4s;
+}
+.nav__dropdown:hover {
+  max-height: 100rem;
+}
+.nav__dropdown:hover .nav__dropdown-icon {
+  transform: rotate(90deg);
+}
 
-/*estilos para el sidebar*/
-.p-sidebar-custom{
-    position: fixed;
-    position: relative !important; /* Cambia de fixed o absolute a relative */
-    z-index: 1 !important;
-    box-shadow: none; /* Opcional: eliminar la sombra */
-    border-right: 1px solid #ccc;
-    width: 250px;
-    height: 100vh;
-    transition: width 1s ease;
-    background-color: rgb(32, 54, 39);
+/*clases agregadas con js*/
+.show-menu {
+  left: 0;
+}
 
+.active {
+  color: var(--first-color);
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    padding: 1rem 3rem 0 6rem;
+  }
+  .header {
+    padding: 0 3rem 0 6rem;
+  }
+  .header__container {
+    height: calc(var(--header-height) + 0.5rem);
   }
   
-  /*esto le coloca color a la opcion que esta activa*/
-  .active.text-600 {
-    background-color: #292f53;
-    color: white !important;  
+  .header__toggle {
+    display: none;
   }
-  
- .font-medium{
-  color: #fff;
- }
-
- .pi{
-  color: #fff;
- }
-  
-  /*Hover para items que no son activos*/
-  .items-sidebar:not(.active):hover{
-    background-color: rgb(224, 210, 210);
+  .header__logo {
+    display: block;
   }
-
-  
-  /*estilo para el boton de cerrar el sidebar*/
-  .button-close-sidebar{
-    margin: 0%;
-    border: none;
-    left: 12px;
-  }
-  .button-close-sidebar:hover{
-    background-color: #292f53;
-    color: #fff !important;
-  }
-  
-  /*estilos para el titulo del sidebar*/
-  .textTitle{
-    color: #292f53;
-    font-size: 20px;
-  }
-
-  /* estilos para cuando se le da cerrar al sidebar */
-    
-  .sidebar-collapsed{
-    position: fixed;
-    position: relative !important; /* Cambia de fixed o absolute a relative */
-    z-index: 1 !important;
-    box-shadow: none; /* Opcional: eliminar la sombra */
-    border-right: 1px solid #ccc;
-    width: 60px; 
-    height: 100vh;
-    transition: width 0.3s ease;
-    background-color: rgb(32, 54, 39);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  } 
-
-  .logo{
+  .header__img {
     width: 40px;
     height: 40px;
-    border-radius: 120px;
+    order: 1;
   }
-
-  
-
-
-
-
+  .nav {
+    left: 0;
+    padding: 1.2rem 1.5rem 0;
+    width: 68px;
+  }
+  .nav__items {
+    row-gap: 1.7rem;
+  }
+  .nav__icon {
+    font-size: 1.3rem;
+  }
+  .nav__logo-name, .nav__name, .nav__subtitle, .nav__dropdown-icon {
+    opacity: 0;
+    transition: 0.3s;
+  }
+  .nav:hover {
+    width: var(--nav-width);
+  }
+  .nav:hover .nav__logo-name {
+    opacity: 1;
+  }
+  .nav:hover .nav__subtitle {
+    opacity: 1;
+  }
+  .nav:hover .nav__name {
+    opacity: 1;
+  }
+  .nav:hover .nav__dropdown-icon {
+    opacity: 1;
+  }
+}

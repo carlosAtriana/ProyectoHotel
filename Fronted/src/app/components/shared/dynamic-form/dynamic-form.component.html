@@ -1,1 +1,156 @@
-<p>dynamic-form works!</p>
+<p-accordion>
+    <p-accordionTab header="{{inputHeader}}" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
+       <form #form="ngForm">
+          <div class="grid">
+             
+ 
+           
+ 
+             <div class="col-12 md:col-6">
+                <label for="nombreId">Nombre activo<span class="text-danger">*</span></label>
+                <input #nombreRef="ngModel" id="nombreId" pInputText type="text" name="nombre" class="w-full"
+                   placeholder="Nombre Activo" [(ngModel)]="dataTransferForm.data.nombre"
+                   [ngClass]="{'ng-invalid ng-dirty': nombreRef.invalid && nombreRef.touched}" maxlength="100" required>
+                @if (dataTransferForm.data.nombre == "" || dataTransferForm.data.nombre == null ||
+                dataTransferForm.data.nombre == undefined) {
+                <small class="warning-message-small">Se debe ingresar el nombre del activo</small>
+                }
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="descr">Descripción<span class="text-danger">*</span></label>
+                <input #descripcionRef="ngModel" id="descr" pInputText type="text" name="descripcion" class="w-full"
+                   placeholder="Descripción" [(ngModel)]="dataTransferForm.data.descripcion"
+                   [ngClass]="{'ng-invalid ng-dirty': descripcionRef.invalid && descripcionRef.touched}" maxlength="500"
+                   required>
+                @if (dataTransferForm.data.descripcion == "" || dataTransferForm.data.descripcion == null ||
+                dataTransferForm.data.descripcion == undefined) {
+                <small class="warning-message-small">Se debe ingresar una descripción</small>
+                }
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="funcion">Función<span class="text-danger">*</span></label>
+                <input #funcionRef="ngModel" id="funcion" pInputText type="text" name="funcion" class="w-full"
+                   placeholder="Función" [(ngModel)]="dataTransferForm.data.funcion"
+                   [ngClass]="{'ng-invalid ng-dirty': funcionRef.invalid && funcionRef.touched}" required>
+                @if (dataTransferForm.data.funcion == "" || dataTransferForm.data.funcion == null ||
+                dataTransferForm.data.funcion == undefined) {
+                <small class="warning-message-small">Se debe ingresar la función</small>
+                }
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="equipment">Equipment</label>
+                <input id="equipment" pInputText type="text" name="equipment" placeholder="Equipment" class="w-full"
+                   [(ngModel)]="dataTransferForm.data.equipment" maxlength="20">
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="latIni">Latitud Inicio</label>
+                <input id="latIni" pInputText type="number" name="latitudInicio" placeholder="Latitud Inicio"
+                   class="w-full" [(ngModel)]="dataTransferForm.data.latitudInicio">
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="longIni">Longitud Inicio</label>
+                <input id="longIni" pInputText type="number" name="longitudInicio" placeholder="Longitud Inicio"
+                   class="w-full" [(ngModel)]="dataTransferForm.data.longitudInicio">
+             </div>
+ 
+             <div class="col-12 md:col-6">
+                <label for="latFin">Latitud Fin</label>
+                <input id="latFin" type="number" pInputText name="latitudFin" placeholder="Latitud Fin" class="w-full"
+                   [(ngModel)]="dataTransferForm.data.latitudFin">
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="longFin">Longitud Fin</label>
+                <input id="longFin" pInputText type="number" name="longitudFin" placeholder="Longitud Fin" class="w-full"
+                   [(ngModel)]="dataTransferForm.data.longitudFin">
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="tag">Tag</label>
+                <input id="tag" pInputText type="text" name="tag" placeholder="Tag" class="w-full"
+                   [(ngModel)]="dataTransferForm.data.tag" maxlength="100">
+             </div>
+             <div class="col-12 md:col-6">
+                <label for="descrUb">Descripción Ubicación <span class="text-danger">*</span></label>
+                <input #descripcionUbicacionRef="ngModel" id="descrUb" pInputText type="text" name="descripcionUbicacion"
+                   placeholder="Descripción Ubicación" class="w-full"
+                   [(ngModel)]="dataTransferForm.data.descripcionUbicacion"
+                   [ngClass]="{'ng-invalid ng-dirty': descripcionUbicacionRef.invalid && descripcionUbicacionRef.touched}"
+                   maxlength="200" required>
+                @if (dataTransferForm.data.descripcionUbicacion == "" || dataTransferForm.data.descripcionUbicacion ==
+                null || dataTransferForm.data.descripcionUbicacion == undefined) {
+                <small class="warning-message-small">Se debe ingresar una descripción de ubicación</small>
+                }
+             </div>
+             <!-- <div class="col-12 md:col-6">
+                <label for="fechaI">Fecha Instalación <span class="text-danger">*</span></label>
+                <p-calendar inputId="fechaI" name="fechaInstalacion" [minDate]="minDate" [maxDate]="maxDate"
+                   [required]="true" placeholder="Seleccione ..." [(ngModel)]="dataTransferForm.data.fechaInstalacion"
+                   styleClass="w-full" [showIcon]="true" dateFormat="MM dd yy" [readonlyInput]="false"
+                   [showButtonBar]="true" appendTo="body">
+                </p-calendar>
+                @if (dataTransferForm.data.fechaInstalacion == null || dataTransferForm.data.fechaInstalacion ==
+                undefined) {
+                <small class="warning-message-small">Se debe seleccionar la fecha de instalación</small>
+                }
+             </div> -->
+             <div class="col-12 md:col-6">
+                <label for="asset">Asset</label>
+                <input id="asset" pInputText type="text" name="asset" placeholder="Asset" class="w-full"
+                   [(ngModel)]="dataTransferForm.data.asset" maxlength="20">
+             </div>
+         
+ 
+             <div class="col-12 formgroup-inline">
+                <div class="field col-12 md:col-6">
+                   <label for="marraneableId"><b>Marraneable</b></label>
+                   <p-checkbox #marraneableRef="ngModel" inputId="marraneableId" name="esMarraneable" [binary]="true"
+                      [(ngModel)]="dataTransferForm.data.esMarraneable"
+                      [ngClass]="{'ng-invalid': marraneableRef.invalid && marraneableRef.touched}" [required]="true">
+                   </p-checkbox>
+                </div>
+ 
+ 
+                <div class="field">
+                   <div class="formgroup-inline">
+                      <span class="ml-0 ml-sm-3 mr-2 "><b>Instalación</b></span>
+                      <div class="field">
+                         <label for="aereaId">Aérea</label>
+                         <p-checkbox #estaParcialoTotalmenteAereaRef="ngModel" inputId="aereaId"
+                            name="estaParcialoTotalmenteAerea" [binary]="true"
+                            [(ngModel)]="dataTransferForm.data.estaParcialoTotalmenteAerea"
+                            [ngClass]="{'ng-invalid': estaParcialoTotalmenteAereaRef.invalid && estaParcialoTotalmenteAereaRef.touched}"
+                            [required]="true"></p-checkbox>
+                      </div>
+                      <div class="field">
+                         <label for="enterradaId">Enterrada</label>
+                         <p-checkbox #estaParcialoTotalmenteEnterradaRef="ngModel" inputId="enterradaId"
+                            name="estaParcialoTotalmenteEnterrada" [binary]="true"
+                            [(ngModel)]="dataTransferForm.data.estaParcialoTotalmenteEnterrada"
+                            [ngClass]="{'ng-invalid': estaParcialoTotalmenteEnterradaRef.invalid && estaParcialoTotalmenteEnterradaRef.touched}"
+                            [required]="true"></p-checkbox>
+                      </div>
+                   </div>
+                </div>
+ 
+             </div>
+ 
+             <div class="col-12 formgroup-inline">
+                <div class="field">
+                   <button type="button" pButton label="Cancelar" class="p-button-outlined"
+                      (click)="onCancelar()"></button>
+                </div>
+                <div class="field">
+                   <button type="button" pButton [label]="buttonLabel" [disabled]="form.invalid" class="colorButton"
+                      (click)="onAceptar()"></button>
+                </div>
+             </div>
+          </div>
+       </form>
+    </p-accordionTab>
+ </p-accordion>
+ 
+ <div class="button-back">
+    <button  ptooltip="Regresar" tooltipposition="right" (click)="onCancelar()"
+        class="p-element btn btn-primary btn-floating fixed-button w-auto p-button p-component">
+        <i class="fa fa-reply"></i>
+    </button>
+ </div>

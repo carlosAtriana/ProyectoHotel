@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.component";
+import { DynamicFormComponent } from "../../shared/dynamic-form/dynamic-form.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [DynamicTableComponent],
+  imports: [DynamicTableComponent, DynamicFormComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
