@@ -27,8 +27,7 @@ menuItem : any[] = [];
 ngOnInit(): void {
     const menu = Object.assign([], environment.menu);
     this.menuItem = menu;
-    console.log(this.menuItem)
-
+    
     const Mostrarmenu = (headerToggle: string, navbarId: string) => {
       const toggleBtn = document.getElementById(headerToggle);
       const nav = document.getElementById(navbarId);

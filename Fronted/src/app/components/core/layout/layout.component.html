@@ -11,19 +11,36 @@
 <div class="nav" id="navbar">
   <nav class="nav__container">
     <div>
-      <a href="#" class="nav__link nav__logo">
+      <a routerLink="home" routerLinkActive="active" class="nav__link nav__logo">
         <i class="bx bxs-disc nav__icon"></i>
-        <span class="nav__logo-name">Hotel la Sierra</span>
+        <span class="nav__logo-name">Menú</span>
       </a>
       <div class="nav__list">
         <div class="nav__items">
-          <h3 class="nav__subtitle">Profile</h3>
-          <a href="#" class="nav__link active">
+          <a routerLink="home" routerLinkActive="active" class="nav__link">
             <i class="bx bx-home nav__icon"></i>
-            <span class="nav__name">Home</span>
+            <span class="nav__name">Incicio</span>
           </a>
-          <div class="nav__dropdown">
-            <a href="#" class="nav__link">
+          <h3 class="nav__subtitle">Administración</h3>
+          <a routerLink="administration/user" routerLinkActive="active" class="nav__link">
+            <i class="pi pi-users nav__icon"></i>
+            <span class="nav__name">Usuarios</span>
+          </a>
+          <a routerLink="administration/client" routerLinkActive="active" class="nav__link">
+            <i class="pi pi-briefcase nav__icon"></i>
+            <span class="nav__name">CLientes</span>
+          </a>
+          <a routerLink="administration/room" routerLinkActive="active" class="nav__link">
+            <i class="bx bx-hotel nav__icon"></i>
+            <span class="nav__name">Habitaciones</span>
+          </a>
+          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
+            <i class="pi pi-shopping-cart nav__icon"></i>
+            <span class="nav__name">Ventas</span>
+          </a>
+          <!-- el codigo comentado es para habilitarlo si tenemos subitems -->
+          <!-- <div class="nav__dropdown">
+            <a routerLink="administration/user" routerLinkActive="active" class="nav__link">
               <i class="bx bx-user nav__icon"></i>
               <span class="nav__name">Profile</span>
               <i
@@ -32,59 +49,38 @@
             </a>
             <div class="nav__dropdown-collapse">
               <div class="nav__dropdown-content">
-                <a href="#" class="nav__dropdown-item">Passwords</a>
-                <a href="#" class="nav__dropdown-item">Mail</a>
-                <a href="#" class="nav__dropdown-item">Accounts</a>
+                <a routerLink="administration/user" routerLinkActive="active" class="nav__dropdown-item">Passwords</a>
+                <a routerLink="administration/user" routerLinkActive="active" class="nav__dropdown-item">Mail</a>
+                <a routerLink="administration/user" routerLinkActive="active" class="nav__dropdown-item">Accounts</a>
               </div>
             </div>
-          
-          </div>
-          <a href="#" class="nav__link">
-            <i class="bx bx-message-rounded nav__icon"></i>
-            <span class="nav__name">Messages</span>
-          </a>
+          </div> -->
         </div>
         <div class="nav__items">
-          <h3 class="nav__subtitle">Menu</h3>
-
-          <div class="nav__dropdown">
-            <a href="#" class="nav__link">
-              <i class="bx bx-bell nav__icon"></i>
-              <span class="nav__name">Notifications</span>
-              <i
-                class="bx bx-chevron-down nav__icon nav__dropdown-icon"
-              ></i>
-            </a>
-            <div class="nav__dropdown-collapse">
-              <div class="nav__dropdown-content">
-                <a href="#" class="nav__dropdown-item">Blocked</a>
-                <a href="#" class="nav__dropdown-item">Silenced</a>
-                <a href="#" class="nav__dropdown-item">Publish</a>
-              </div>
-            </div>
-          </div>
-          <a href="#" class="nav__link">
-            <i class="bx bx-compass nav__icon"></i>
-            <span class="nav__name">Explore</span>
+          <h3 class="nav__subtitle">Gestión</h3>
+          <a routerLink="management/reservation" routerLinkActive="active" class="nav__link">
+            <i class="bx bx-calendar nav__icon"></i>
+            <span class="nav__name">Reservas</span>
           </a>
-          <a href="#" class="nav__link">
+          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
+            <i class="bx bx-book nav__icon"></i>
+            <span class="nav__name">Recepción</span>
+          </a>
+          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
             <i class="bx bx-bookmark nav__icon"></i>
-            <span class="nav__name">Saved</span>
+            <span class="nav__name">Punto de venta</span>
           </a>
+          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
+            <i class="bx bx-check-circle nav__icon"></i>
+            <span class="nav__name">Verficación de <br>salida</span>
+          </a>
+
         </div>
       </div>
     </div>
-    <a href="#" class="nav__link nav__logout">
-        <i class="bx bx-log-out nav__icon"></i>
-        <span class="nav__name">Log Out</span>
+    <a routerLink="administration/.." routerLinkActive="active" class="nav__link nav__logout">
+      <i class="bx bx-log-out nav__icon"></i>
+      <span class="nav__name">Salir</span>
     </a>
   </nav>
 </div>
-<!--CONTENIDO-->
-<main>
-    <section>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A dolor fuga magni obcaecati eius saepe consectetur, odit suscipit qui laboriosam? Debitis maiores repudiandae hic mollitia corrupti, itaque esse consequuntur. Enim.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A dolor fuga magni obcaecati eius saepe consectetur, odit suscipit qui laboriosam? Debitis maiores repudiandae hic mollitia corrupti, itaque esse consequuntur. Enim.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A dolor fuga magni obcaecati eius saepe consectetur, odit suscipit qui laboriosam? Debitis maiores repudiandae hic mollitia corrupti, itaque esse consequuntur. Enim.</p>
-    </section>
-</main>

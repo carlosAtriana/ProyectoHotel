@@ -11,13 +11,13 @@ import { DynamicFormComponent } from "../../shared/dynamic-form/dynamic-form.com
 })
 export class UserComponent {
 
-  title:any[] = ['nombre', 'apellido', 'sexo']
+  title:any[] = ['Nombre', 'Apellido', 'Sexo']
 
   body: any = [
-      {nombre: 'Carlos', apellido: 'Triana', sexo: 'masculino'},
-      {nombre: 'Juana', apellido: 'Martinez', sexo: 'femenino'},
-      {nombre: 'SOfia', apellido: 'Gonzales', sexo: 'femenino'},
-      {nombre: 'Jancho ', apellido: 'Piñeres', sexo: 'Masculino'},
+      {Nombre: 'Carlos', Apellido: 'Triana', Sexo: 'masculino'},
+      {Nombre: 'Juana', Apellido: 'Martinez', Sexo: 'femenino'},
+      {Nombre: 'SOfia', Apellido: 'Gonzales', Sexo: 'femenino'},
+      {Nombre: 'Jancho ', Apellido: 'Piñeres', Sexo: 'Masculino'},
   ]
  
 }
