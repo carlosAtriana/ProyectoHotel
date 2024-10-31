@@ -29,12 +29,16 @@
   }
 }
 
+body{
+  margin: 0;
+  padding: 0;
+}
 /*Formateo de pagina*/
 * {
   box-sizing: border-box;
 }
 
-body {
+.container-content {
   margin: var(--header-height) 0 0 0;
   padding: 1rem 1rem 0;
   font-family: var(--body-font);
@@ -196,7 +200,7 @@ a {
 }
 
 @media screen and (min-width: 768px) {
-  body {
+  .container-content {
     padding: 1rem 3rem 0 6rem;
   }
   .header {
@@ -219,7 +223,7 @@ a {
   }
   .nav {
     left: 0;
-    padding: 1.2rem 1.5rem 0;
+    padding: 1.2rem 1.1rem 0;
     width: 68px;
   }
   .nav__items {
@@ -247,4 +251,5 @@ a {
   .nav:hover .nav__dropdown-icon {
     opacity: 1;
   }
+ 
 }

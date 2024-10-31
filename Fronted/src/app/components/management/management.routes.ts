@@ -8,11 +8,22 @@ export const routesManagement: Routes = [
       {
         path: 'reservation',
         loadComponent: () =>
-          import('./reservation/reservation.component').then(
-            (m) => m.ReservationComponent
+          import('./reservation/reservation.component').then((m) => m.ReservationComponent
           ),
-        title: 'Reservaciones',
+        title: 'Reservas',
       },
+      {
+        path: 'reception',
+        loadComponent: () =>
+          import('./reception/reception.component').then((m) => m.ReceptionComponent),
+        title: 'Recepción',
+      },
+      {
+        path: 'point-of-sale',
+        loadComponent: () =>
+          import('./point-of-sale/point-of-sale.component').then((m) => m.PointOfSaleComponent),
+        title: 'Punto de Venta',
+      }
     ],
   },
 ];
