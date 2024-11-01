@@ -3,6 +3,8 @@ package com.hotel.controller;
 import com.hotel.model.Cliente;
 import com.hotel.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,24 +30,25 @@ public class ClienteController {
         return clienteService.guardarCliente(cliente);
     }
 
-    @GetMapping("/{id}")
-    public Cliente obtenerPorId(@PathVariable String id){
-        return clienteService.obtenerClientePorId(id);
+    @GetMapping("/{cedula}")
+    public Cliente obtenerPorId(@PathVariable Long cedula){
+        return clienteService.obtenerClientePorCedula(cedula);
     }
 
-    @PutMapping("/{id}")
-    public void actualizar(@RequestBody Cliente cliente, @PathVariable String id){
-        Cliente clienteBuscar = clienteService.obtenerClientePorId(id);
-        Cliente clienteAux;
-        if(clienteBuscar.getId() == id){
-            cliente.setNombre(clienteBuscar.getNombre());
-            clienteAux = clienteService.guardarCliente(cliente);
-        }
+    @PutMapping("/{cedula}")
+    public ResponseEntity<String> actualizarCliente(@PathVariable Long cedula, @RequestBody Cliente cliente) {
+    Cliente clienteExistente = clienteService.obtenerClientePorCedula(cedula);
+
+    if (clienteExistente == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
     }
+    clienteService.guardarCliente(cliente);
+    return ResponseEntity.ok("Cliente actualizado exitosamente");
+}
 
     @DeleteMapping
-    public void eliminar(@PathVariable String id){
-        clienteService.eliminarCliente(id);
+    public void eliminar(@PathVariable Long cedula){
+        clienteService.eliminarCliente(cedula);
     }
 
 }

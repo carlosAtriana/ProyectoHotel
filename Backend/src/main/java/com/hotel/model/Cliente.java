@@ -10,8 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "usuarios")
 public class Cliente {
 
-    @Id
-    private String id;
+    private Long cedula;
     private String nombre;
     private String email;
 
