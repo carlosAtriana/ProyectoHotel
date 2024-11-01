@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { environment } from '../environments/environment';
+import { PrimeNGConfig } from 'primeng/api';
 
 
 @Component({
@@ -10,5 +12,14 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Fronted';
+  innerWidth?: string;
+  es = environment.esI18N;
+
+  constructor(private config: PrimeNGConfig){
+   
+  }
+
+  ngOnInit(): void {
+    this.config.setTranslation(this.es);
+  }
 }
