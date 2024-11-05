@@ -2,47 +2,47 @@
 <div class="card">
 
     <p-table [columns]="titleColumn" [value]="body" #dt [paginator]="true" [rows]="10"
-    [rowsPerPageOptions]="[10, 20, 30]" [responsiveLayout]="'scroll'" [autoLayout]="true"
-    [showCurrentPageReport]="true" [responsive]="true"
-    currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
-    <ng-template pTemplate="caption">
-        <div style="text-align:right; max-width: 100%; width: 100%;">
-            <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
-                    placeholder="Buscar" />
-            </span>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Opciones</th>
+        [rowsPerPageOptions]="[10, 20, 30]" [responsiveLayout]="'scroll'" [autoLayout]="true"
+        [showCurrentPageReport]="true" [responsive]="true"
+        currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
+        <ng-template pTemplate="caption">
+            <div style="text-align:right; max-width: 100%; width: 100%;">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                        placeholder="Buscar" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Opciones</th>
 
-            <ng-container *ngFor="let field of titleColumn">
+                <ng-container *ngFor="let field of titleColumn">
 
-                <th>
-                    <div style="display: flex; align-items: center;">
-                        {{field}}
-                        <p-columnFilter type="text" field="{{field}}" display="menu" />
-                    </div>
-                </th>
-            </ng-container>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-body>
-        <tr>
-            <td class="btn-table-action">
-                <button pTooltip="Editar" tooltipPosition="right" pButton pRipple type="button" icon="pi pi-pencil"
-                    class="p-button-rounded p-button-text" (click)="onEdit(body)"></button>
+                    <th>
+                        <div style="display: flex; align-items: center;">
+                            {{field}}
+                            <p-columnFilter type="text" field="{{field}}" display="menu" />
+                        </div>
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-body>
+            <tr>
+                <td class="btn-table-action">
+                    <button pTooltip="Editar" tooltipPosition="right" pButton pRipple type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-text" (click)="onEdit(body)"></button>
 
-                <button pTooltip="Eliminar" tooltipPosition="right" pButton pRipple type="button" icon="pi pi-trash"
-                    class="p-button-rounded p-button-text" (click)="onDelete(body)"></button>
-            </td>
-            <ng-container *ngFor="let field of titleColumn">
-                <td>{{ body[field] }}</td>
-            </ng-container>
+                    <button pTooltip="Eliminar" tooltipPosition="right" pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-text" (click)="onDelete(body)"></button>
+                </td>
+                <ng-container *ngFor="let field of titleColumn">
+                    <td>{{ body[field] }}</td>
+                </ng-container>
 
-        </tr>
-    </ng-template>
-</p-table>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

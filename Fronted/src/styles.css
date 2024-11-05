@@ -253,3 +253,8 @@ a {
   }
 }
 
+/* estilos para los botones de eliminar y editar de las tablas */
+.btn-table-action{
+  display: flex;
+}
+
