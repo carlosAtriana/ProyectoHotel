@@ -25,9 +25,17 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+
+
+
     public Cliente guardarCliente(Cliente cliente) {
-        return clienteRepository.save(cliente);
+    if (clienteRepository.existsByCedula(cliente.getCedula())) {
+        throw new com.hotel.validation.CedulaRepetidaException("La cédula ya está registrada. Por favor, ingrese un valor único.");
     }
+    return clienteRepository.save(cliente);
+}
+
+
 
 
     public void eliminarCliente(Long cedula) {
