@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, input, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
@@ -10,12 +10,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { IdataTransferForm } from '../../core/models/idata-transfer-form';
 import { AlertService } from '../../core/services/alert.service';
 import { Mode } from '../../core/enums/mode';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
   imports: [AccordionModule, FormsModule, DropdownModule, FormsModule, CalendarModule, CheckboxModule, 
-    ButtonModule, CommonModule, InputTextModule],
+    ButtonModule, CommonModule, InputTextModule, TooltipModule, InputTextModule],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.css'
 })
