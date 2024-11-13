@@ -14,10 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -40,16 +36,9 @@ public class ClienteController {
         return new ResponseEntity<>(clienteGuardado, HttpStatus.CREATED);
     }
 
-<<<<<<< Updated upstream
     @GetMapping("/{cedula}")
     public Cliente obtenerPorId(@PathVariable Long cedula){
         return clienteService.obtenerClientePorCedula(cedula);
-=======
-
-    @GetMapping("/{id}")
-    public Cliente obtenerPorId(@PathVariable String id){
-        return clienteService.obtenerClientePorId(id);
->>>>>>> Stashed changes
     }
 
     @PutMapping("/{cedula}")

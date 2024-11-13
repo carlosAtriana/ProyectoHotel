@@ -1,32 +1,10 @@
-/* Contenedor principal */
-.layout {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  
-  /* Contenedor principal al lado del sidebar */
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  
 
-  
-  /* Botón para abrir el sidebar */
-  .button-open-sidebar {
-    margin-right: 1rem;
-  }
 
-  .content-area {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem;
-  }
-
+.logo_img{
+  width: 2rem;
+  height: 2rem;
+  border-radius: 12rem;
+}
 
   
 

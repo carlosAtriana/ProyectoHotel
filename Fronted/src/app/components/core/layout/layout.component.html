@@ -1,45 +1,49 @@
 <!-- NAVBAR -->
-<header class="header">
-  <div class="header__container">
-    <img src="assets/logoHotel.webp" class="header__img" />
-    <div class="header__toggle">
-      <i class="bx bx-menu" id="header-toggle"></i>
+<div>
+  <header class="header">
+    <div class="header__container">
+       <!-- <img src="assets/logoHotel.webp" class="header__img" />  -->
+      <div class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
     </div>
-  </div>
-</header>
-<!--SIDEBAR-->
-<div class="nav" id="navbar">
-  <nav class="nav__container">
-    <div>
-      <a routerLink="home" routerLinkActive="active" class="nav__link nav__logo">
-        <i class="bx bxs-disc nav__icon"></i>
-        <span class="nav__logo-name">Menú</span>
-      </a>
-      <div class="nav__list">
-        <div class="nav__items">
-          <a routerLink="home" routerLinkActive="active" class="nav__link">
-            <i class="bx bx-home nav__icon"></i>
-            <span class="nav__name">Incicio</span>
+  </header>
+  <!--SIDEBAR-->
+  <div class="nav" id="navbar">
+    <nav class="nav__container">
+      <div>
+        <div style="width: 100%;">
+
+          <a routerLink="home" routerLinkActive="active" class="nav__link nav__logo">
+            <i class="nav__icon"> <img src="assets/logoHotel.webp" class="logo_img"> </i>
+            <span class="nav__logo-name text-center">Hotel <br>la <br>Sierra</span>
           </a>
-          <h3 class="nav__subtitle">Administración</h3>
-          <a routerLink="administration/user" routerLinkActive="active" class="nav__link">
-            <i class="pi pi-users nav__icon"></i>
-            <span class="nav__name">Usuarios</span>
-          </a>
-          <a routerLink="administration/client" routerLinkActive="active" class="nav__link">
-            <i class="pi pi-briefcase nav__icon"></i>
-            <span class="nav__name">CLientes</span>
-          </a>
-          <a routerLink="administration/room" routerLinkActive="active" class="nav__link">
-            <i class="bx bx-hotel nav__icon"></i>
-            <span class="nav__name">Habitaciones</span>
-          </a>
-          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
-            <i class="pi pi-shopping-cart nav__icon"></i>
-            <span class="nav__name">Ventas</span>
-          </a>
-          <!-- el codigo comentado es para habilitarlo si tenemos subitems -->
-          <!-- <div class="nav__dropdown">
+        </div>
+        <div class="nav__list">
+          <div class="nav__items">
+            <a routerLink="home" routerLinkActive="active" class="nav__link">
+              <i class="bx bx-home nav__icon"></i>
+              <span class="nav__name">Incicio</span>
+            </a>
+            <h3 class="nav__subtitle">Administración</h3>
+            <a routerLink="administration/user" routerLinkActive="active" class="nav__link">
+              <i class="pi pi-users nav__icon"></i>
+              <span class="nav__name">Usuarios</span>
+            </a>
+            <a routerLink="administration/customer" routerLinkActive="active" class="nav__link">
+              <i class="pi pi-briefcase nav__icon"></i>
+              <span class="nav__name">Clientes</span>
+            </a>
+            <a routerLink="administration/room" routerLinkActive="active" class="nav__link">
+              <i class="bx bx-hotel nav__icon"></i>
+              <span class="nav__name">Habitaciones</span>
+            </a>
+            <a routerLink="administration/sale" routerLinkActive="active" class="nav__link">
+              <i class="pi pi-shopping-cart nav__icon"></i>
+              <span class="nav__name">Ventas</span>
+            </a>
+            <!-- el codigo comentado es para habilitarlo si tenemos subitems -->
+            <!-- <div class="nav__dropdown">
             <a routerLink="administration/user" routerLinkActive="active" class="nav__link">
               <i class="bx bx-user nav__icon"></i>
               <span class="nav__name">Profile</span>
@@ -55,32 +59,32 @@
               </div>
             </div>
           </div> -->
-        </div>
-        <div class="nav__items">
-          <h3 class="nav__subtitle">Gestión</h3>
-          <a routerLink="management/reservation" routerLinkActive="active" class="nav__link">
-            <i class="bx bx-calendar nav__icon"></i>
-            <span class="nav__name">Reservas</span>
-          </a>
-          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
-            <i class="bx bx-book nav__icon"></i>
-            <span class="nav__name">Recepción</span>
-          </a>
-          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
-            <i class="bx bx-bookmark nav__icon"></i>
-            <span class="nav__name">Punto de venta</span>
-          </a>
-          <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
-            <i class="bx bx-check-circle nav__icon"></i>
-            <span class="nav__name">Verficación de <br>salida</span>
-          </a>
-
+          </div>
+          <div class="nav__items">
+            <h3 class="nav__subtitle">Gestión</h3>
+            <a routerLink="management/reservation" routerLinkActive="active" class="nav__link">
+              <i class="bx bx-calendar nav__icon"></i>
+              <span class="nav__name">Reservas</span>
+            </a>
+            <a routerLink="management/reception" routerLinkActive="active" class="nav__link">
+              <i class="bx bx-book nav__icon"></i>
+              <span class="nav__name">Recepción</span>
+            </a>
+            <a routerLink="management/point-of-sale" routerLinkActive="active" class="nav__link">
+              <i class="bx bx-bookmark nav__icon"></i>
+              <span class="nav__name">Punto de venta</span>
+            </a>
+            <a routerLink="administration/.." routerLinkActive="active" class="nav__link">
+              <i class="bx bx-check-circle nav__icon"></i>
+              <span class="nav__name">Verficación de <br>salida</span>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    <a routerLink="administration/.." routerLinkActive="active" class="nav__link nav__logout">
-      <i class="bx bx-log-out nav__icon"></i>
-      <span class="nav__name">Salir</span>
-    </a>
-  </nav>
+      <a routerLink="login" routerLinkActive="active" class="nav__link nav__logout">
+        <i class="bx bx-log-out nav__icon"></i>
+        <span class="nav__name">Salir</span>
+      </a>
+    </nav>
+  </div>
 </div>

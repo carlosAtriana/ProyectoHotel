@@ -17,10 +17,6 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public Cliente obtenerClientePorCedula(Long cedula) {
-        return clienteRepository.findByCedula(cedula); // Asegúrate de que este método exista en el repositorio
-    }
-
     public List<Cliente> obtenerTodosLosClientes() {
         return clienteRepository.findAll();
     }
@@ -37,8 +33,11 @@ public class ClienteService {
 
 
 
+    public Cliente obtenerClientePorId(String id) {
+        return clienteRepository.findById(id).orElse(null);
+    }
 
-    public void eliminarCliente(Long cedula) {
-        clienteRepository.deleteBycedula(cedula);
+    public void eliminarCliente(String id) {
+        clienteRepository.deleteById(id);
     }
 }

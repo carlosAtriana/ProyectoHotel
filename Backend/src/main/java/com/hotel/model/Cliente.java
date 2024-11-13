@@ -17,9 +17,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "usuarios")
 public class Cliente {
 
-<<<<<<< Updated upstream
-    private Long cedula;
-=======
     @Id
     private String id;
     @NotNull(message = "La cédula no puede ser nula")
@@ -27,10 +24,10 @@ public class Cliente {
     private String cedula;
     @NotNull(message = "El nombre no puede ser nulo")
     @NotBlank(message = "no puede estar vació")
->>>>>>> Stashed changes
     private String nombre;
     @NotNull(message = "El email no puede ser nulo")
     @Email(message = "Debe proporcionar un correo electrónico válido")
     private String email;
+
 
 }
