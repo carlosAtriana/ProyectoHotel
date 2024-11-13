@@ -1,12 +1,12 @@
-import { Component , signal, ChangeDetectorRef } from '@angular/core';
+import { Component , signal, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { EventManagerPlugin } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
+import { AlertService } from '../../core/services/alert.service';
 
 @Component({
   selector: 'app-reservation',
@@ -22,11 +22,6 @@ export class ReservationComponent {
       interactionPlugin,
       dayGridPlugin,
     ],
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-    },
     initialView: 'dayGridMonth',
     // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
@@ -43,6 +38,9 @@ export class ReservationComponent {
     eventRemove:
     */
   });
+
+  alertService = inject(AlertService);
+
   currentEvents = signal<EventManagerPlugin[]>([]);
 
   constructor(private changeDetector: ChangeDetectorRef) {
@@ -62,7 +60,7 @@ export class ReservationComponent {
   handleDateSelect(selectInfo: DateSelectArg) {
     const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
-
+    console.log(calendarApi);
     calendarApi.unselect(); // clear date selection
 
     if (title) {

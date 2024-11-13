@@ -2,18 +2,14 @@ package com.hotel.controller;
 
 import com.hotel.model.Cliente;
 import com.hotel.service.ClienteService;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -28,33 +24,29 @@ public class ClienteController {
         return clienteService.obtenerTodosLosClientes();
     }
 
-
-
     @PostMapping
-    public ResponseEntity<Cliente> guardar(@Valid @RequestBody Cliente cliente) {
-        Cliente clienteGuardado = clienteService.guardarCliente(cliente);
-        return new ResponseEntity<>(clienteGuardado, HttpStatus.CREATED);
+    public Cliente guardar(@RequestBody Cliente cliente){
+        return clienteService.guardarCliente(cliente);
     }
 
-    @GetMapping("/{cedula}")
-    public Cliente obtenerPorId(@PathVariable Long cedula){
-        return clienteService.obtenerClientePorCedula(cedula);
+    @GetMapping("/{id}")
+    public Cliente obtenerPorId(@PathVariable String id){
+        return clienteService.obtenerClientePorId(id);
     }
 
-    @PutMapping("/{cedula}")
-    public ResponseEntity<String> actualizarCliente(@PathVariable Long cedula, @RequestBody Cliente cliente) {
-    Cliente clienteExistente = clienteService.obtenerClientePorCedula(cedula);
-
-    if (clienteExistente == null) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
+    @PutMapping("/{id}")
+    public void actualizar(@RequestBody Cliente cliente, @PathVariable String id){
+        Cliente clienteBuscar = clienteService.obtenerClientePorId(id);
+        Cliente clienteAux;
+        if(clienteBuscar.getId() == id){
+            cliente.setNombre(clienteBuscar.getNombre());
+            clienteAux = clienteService.guardarCliente(cliente);
+        }
     }
-    clienteService.guardarCliente(cliente);
-    return ResponseEntity.ok("Cliente actualizado exitosamente");
-}
 
     @DeleteMapping
-    public void eliminar(@PathVariable Long cedula){
-        clienteService.eliminarCliente(cedula);
+    public void eliminar(@PathVariable String id){
+        clienteService.eliminarCliente(id);
     }
 
 }

@@ -1,0 +1,24 @@
+<p-accordion>
+    <p-accordionTab header="{{inputHeader}}" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
+       <form #form="ngForm">
+          <div class="grid">
+             <div class="col-12 md:col-6">
+                <label for="nombreId">Nombre activo<span class="text-danger">*</span></label>
+                <input id="nombreId" pInputText type="text" name="nombre" class="w-full" placeholder="Nombre Activo"
+                   maxlength="100" required>
+             </div>
+          </div>
+          <div class="col-12 formgroup-inline">
+             <div class="field">
+                <button type="button" pButton label="Cancelar" class="p-button-outlined" (click)="onCancelar()"></button>
+             </div>
+             <div class="field">
+                <button type="button" pButton label="Guardar"  class="colorButton"
+                   (click)="onAceptar()"></button>
+             </div>
+          </div>
+       </form>
+    </p-accordionTab>
+ </p-accordion>
+ 
+ 

@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.component";
+import { Mode } from '../../core/enums/mode';
+import { IdataTransferForm } from '../../core/models/idata-transfer-form';
+import { RoomInputFieldsComponent } from "./room-input-fields/room-input-fields.component";
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-room',
   standalone: true,
-  imports: [DynamicTableComponent],
+  imports: [DynamicTableComponent, RoomInputFieldsComponent, ButtonModule, TooltipModule],
   templateUrl: './room.component.html',
   styleUrl: './room.component.css'
 })
@@ -158,5 +163,23 @@ export class RoomComponent {
     },
     
   ]
+
+  dataTransferForm: IdataTransferForm<any> = {
+    data: {} as any,
+    mode: Mode.none
+  }
+  mode: typeof Mode= Mode;
+
+  onNew(){
+    this.dataTransferForm.mode = Mode.new;
+  }
+
+  onCancel(){
+    delete this.dataTransferForm.data;
+    this.dataTransferForm.mode = Mode.none;
+  }
+ 
+
 }
+
 

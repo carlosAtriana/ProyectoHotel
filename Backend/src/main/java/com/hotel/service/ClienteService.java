@@ -21,17 +21,9 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-
-
-
     public Cliente guardarCliente(Cliente cliente) {
-    if (clienteRepository.existsByCedula(cliente.getCedula())) {
-        throw new com.hotel.validation.CedulaRepetidaException("La cédula ya está registrada. Por favor, ingrese un valor único.");
+        return clienteRepository.save(cliente);
     }
-    return clienteRepository.save(cliente);
-}
-
-
 
     public Cliente obtenerClientePorId(String id) {
         return clienteRepository.findById(id).orElse(null);

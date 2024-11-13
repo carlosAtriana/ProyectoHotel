@@ -1,26 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, input, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Mode } from '../../../core/enums/mode';
+import { AlertService } from '../../../core/services/alert.service';
+import { IdataTransferForm } from '../../../core/models/idata-transfer-form';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
-import { CheckboxModule } from 'primeng/checkbox';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { IdataTransferForm } from '../../core/models/idata-transfer-form';
-import { AlertService } from '../../core/services/alert.service';
-import { Mode } from '../../core/enums/mode';
-import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
-  selector: 'app-dynamic-form',
+  selector: 'app-room-input-fields',
   standalone: true,
-  imports: [AccordionModule, FormsModule, DropdownModule, FormsModule, CalendarModule, CheckboxModule, 
-    ButtonModule, CommonModule, InputTextModule, TooltipModule, InputTextModule],
-  templateUrl: './dynamic-form.component.html',
-  styleUrl: './dynamic-form.component.css'
+  imports: [AccordionModule, FormsModule, ButtonModule, InputTextModule],
+  templateUrl: './room-input-fields.component.html',
+  styleUrl: './room-input-fields.component.css'
 })
-export class DynamicFormComponent {
+export class RoomInputFieldsComponent {
 
   @ViewChild('form') form!: NgForm;
   @Input() dataTransferForm: IdataTransferForm<any> = {} as IdataTransferForm<any>;
@@ -70,7 +64,7 @@ export class DynamicFormComponent {
         } else {          
           this.alertService.question('hola',
             `¿Está seguro en editar el activo?.`,
-            'Si','No').then((result) => {
+            'Si','No').then((result:any) => {
               if (result.isConfirmed){
                 this.update.emit(value);
               }
@@ -115,4 +109,6 @@ export class DynamicFormComponent {
     //this.dataTransferForm.data.sistemaId = this.systemSelected.id
   }
 }
+
+
 

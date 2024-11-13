@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.component";
+import { CustomerInputFieldsComponent } from "./customer-input-fields/customer-input-fields.component";
+import { Mode } from '../../core/enums/mode';
+import { IdataTransferForm } from '../../core/models/idata-transfer-form';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [DynamicTableComponent],
+  imports: [DynamicTableComponent, CustomerInputFieldsComponent, ButtonModule, TooltipModule],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.css'
 })
@@ -240,4 +245,26 @@ export class CustomerComponent {
       Estado: 'Inactivo',
     },
   ];
+
+  
+  dataTransferForm: IdataTransferForm<any> = {
+    data: {} as any,
+    mode: Mode.none
+  }
+  mode: typeof Mode= Mode;
+
+  onNew(){
+    this.dataTransferForm.mode = Mode.new;
+  }
+
+  onCancel(){
+    delete this.dataTransferForm.data;
+    this.dataTransferForm.mode = Mode.none;
+  }
+ 
+
 }
+
+
+
+

@@ -5,11 +5,13 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { IdataTransferForm } from '../../core/models/idata-transfer-form';
 import { Mode } from '../../core/enums/mode';
+import { Validators } from '@angular/forms';
+import { UserInputFieldsComponent } from "./user-input-fields/user-input-fields.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [DynamicTableComponent, DynamicFormComponent, TooltipModule, ButtonModule],
+  imports: [DynamicTableComponent, TooltipModule, ButtonModule, UserInputFieldsComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -38,4 +40,9 @@ export class UserComponent {
     this.dataTransferForm.mode = Mode.none;
   }
  
+  formFields = [
+    { type: 'text', label: 'Nombre', name: 'nombre', validations: [Validators.required] },
+    { type: 'email', label: 'Correo Electrónico', name: 'email', validations: [Validators.required, Validators.email] },
+    { type: 'number', label: 'Edad', name: 'edad', validations: [Validators.required, Validators.min(18)] }
+  ];
 }

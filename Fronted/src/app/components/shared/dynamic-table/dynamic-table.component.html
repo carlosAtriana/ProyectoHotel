@@ -3,7 +3,7 @@
 
     <p-table [columns]="titleColumn" [value]="body" #dt [paginator]="true" [rows]="10"
         [rowsPerPageOptions]="[10, 20, 30]" [responsiveLayout]="'scroll'" [autoLayout]="true"
-        [showCurrentPageReport]="true" [responsive]="true"
+        [showCurrentPageReport]="true"
         currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
         <ng-template pTemplate="caption">
             <div style="text-align:right; max-width: 100%; width: 100%;">
@@ -17,7 +17,6 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>Opciones</th>
-
                 <ng-container *ngFor="let field of titleColumn">
 
                     <th>

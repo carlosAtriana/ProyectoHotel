@@ -3,7 +3,6 @@
     <div class='demo-app-sidebar'>
     </div>
     <div class='demo-app-sidebar-section'>
-        <h2>All Events ({{currentEvents().length}})</h2>
         <ul>
             <li *ngFor='let event of currentEvents()'>
 
@@ -12,7 +11,7 @@
     </div>
 </div>
 
-<div class='demo-app-main'>
+<div class='demo-app-main' style="width: 70rem;">
     <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
         <ng-template #eventContent let-arg>
             <b>{{ arg.timeText }}</b>
