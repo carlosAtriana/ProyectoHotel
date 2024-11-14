@@ -24,10 +24,16 @@ public class ClienteController {
         return clienteService.obtenerTodosLosClientes();
     }
 
+
+
     @PostMapping
     public Cliente guardar(@RequestBody Cliente cliente){
+        
         return clienteService.guardarCliente(cliente);
     }
+
+
+
 
     @GetMapping("/{id}")
     public Cliente obtenerPorId(@PathVariable String id){
