@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Mode } from '../../../core/enums/mode';
 import { AlertService } from '../../../core/services/alert.service';
-import { IdataTransferForm } from '../../../core/models/idata-transfer-form';
+import { IdataTransferForm } from '../../../core/models/data-transfer-form';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
 import { InputTextModule } from 'primeng/inputtext';

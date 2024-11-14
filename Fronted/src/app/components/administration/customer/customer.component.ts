@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.component";
 import { CustomerInputFieldsComponent } from "./customer-input-fields/customer-input-fields.component";
 import { Mode } from '../../core/enums/mode';
-import { IdataTransferForm } from '../../core/models/idata-transfer-form';
+import { IdataTransferForm } from '../../core/models/data-transfer-form';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 

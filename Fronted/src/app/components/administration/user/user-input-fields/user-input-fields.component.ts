@@ -4,7 +4,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { InputTextModule } from 'primeng/inputtext';
 import { Mode } from '../../../core/enums/mode';
 import { AlertService } from '../../../core/services/alert.service';
-import { IdataTransferForm } from '../../../core/models/idata-transfer-form';
+import { IdataTransferForm } from '../../../core/models/data-transfer-form';
 import { ButtonModule } from 'primeng/button';
 
 @Component({

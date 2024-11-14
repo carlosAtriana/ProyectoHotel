@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.component";
 import { Mode } from '../../core/enums/mode';
-import { IdataTransferForm } from '../../core/models/idata-transfer-form';
+import { IdataTransferForm } from '../../core/models/data-transfer-form';
 import { RoomInputFieldsComponent } from "./room-input-fields/room-input-fields.component";
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';

@@ -3,7 +3,7 @@ import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.
 import { DynamicFormComponent } from "../../shared/dynamic-form/dynamic-form.component";
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
-import { IdataTransferForm } from '../../core/models/idata-transfer-form';
+import { IdataTransferForm } from '../../core/models/data-transfer-form';
 import { Mode } from '../../core/enums/mode';
 import { Validators } from '@angular/forms';
 import { UserInputFieldsComponent } from "./user-input-fields/user-input-fields.component";

@@ -7,7 +7,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { IdataTransferForm } from '../../core/models/idata-transfer-form';
+import { IdataTransferForm } from '../../core/models/data-transfer-form';
 import { AlertService } from '../../core/services/alert.service';
 import { Mode } from '../../core/enums/mode';
 import { TooltipModule } from 'primeng/tooltip';
