@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Reservation {
     @Id
     private String id;
-    private String sequential;
+    private Long sequential;
     private Date checkInDate;
     private Date checkOutDate;
     private Integer numberGuests;
