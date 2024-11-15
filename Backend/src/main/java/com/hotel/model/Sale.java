@@ -1,5 +1,5 @@
 package com.hotel.model;
 
-public class Habitaciones {
+public class Sale {
 
 }

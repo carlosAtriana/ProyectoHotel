@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DynamicTableComponent } from "../../shared/dynamic-table/dynamic-table.component";
 import { CustomerInputFieldsComponent } from "./customer-input-fields/customer-input-fields.component";
 import { Mode } from '../../core/enums/mode';
 import { IdataTransferForm } from '../../core/models/data-transfer-form';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
+import { AdministrationService } from '../../core/services/administration.service';
+import { AlertService } from '../../core/services/alert.service';
+import { environment } from '../../../../environments/environment';
+import { ICustomer } from '../../core/models/customer';
+import { IUser } from '../../core/models/user';
 
 @Component({
   selector: 'app-customer',
@@ -246,6 +251,45 @@ export class CustomerComponent {
     },
   ];
 
+  listCustomers: ICustomer[] = [];
+
+  administrationService = inject(AdministrationService)
+  alertService = inject(AlertService)
+
+  ngOnInit(): void {
+    this.getCustomers();
+  }
+
+  getCustomers(){
+    this.administrationService.getAllCuestomer().subscribe({
+      next: (data)=>{
+        this.listCustomers = data;
+       console.log(data);
+
+      },
+      error: (error)=>{
+        this.alertService.error(environment.title, error.error.message);
+      },
+      complete: ()=>{
+        console.log('complete');
+      }
+    });
+  }
+  
+  createCustomer(customer: any){
+    this.administrationService.createCustomer(customer).subscribe({
+      next: (data)=>{
+        this.alertService.success(environment.title, 'Cliente creado correctamente');
+        this.getCustomers();
+      },
+      error: (error)=>{
+        this.alertService.error(environment.title, error.error.message);
+      },
+      complete: ()=>{
+        console.log('complete');
+      }
+    });
+  }
   
   dataTransferForm: IdataTransferForm<any> = {
     data: {} as any,

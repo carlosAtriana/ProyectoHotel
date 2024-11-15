@@ -2,10 +2,10 @@ package com.hotel.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
-import com.hotel.model.Reserva;
+import com.hotel.model.Reservation;
 
 @Repository
-public interface ReservaRepository extends MongoRepository<Reserva, String>{
+public interface ReservationRepository extends MongoRepository<Reservation, String>{
 
     
     

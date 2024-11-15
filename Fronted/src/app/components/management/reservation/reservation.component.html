@@ -1,4 +1,3 @@
-
 <div class='demo-app-main' style="width: 70rem;">
     <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
         <ng-template #eventContent let-arg>
@@ -8,19 +7,47 @@
     </full-calendar>
 </div>
 
-<p-dialog header="Edit Profile" [modal]="true" [draggable]="false" [(visible)]="modalVisible" 
-  [style]="{ width: '25rem' }">
-    <span class="p-text-secondary block mb-5">Update your information.</span>
-    <div class="flex align-items-center gap-3 mb-3">
-        <label for="username" class="font-semibold w-6rem">Username</label>                                                                     
-        <input pInputText id="username" class="flex-auto" autocomplete="off" />
-    </div>
-    <div class="flex align-items-center gap-3 mb-5">
-        <label for="email" class="font-semibold w-6rem">Email</label>
-        <input pInputText id="email" class="flex-auto" autocomplete="off" />
-    </div>
-    <div class="flex justify-content-end gap-2">
-        <p-button label="Cancel" severity="secondary" (onClick)="modalVisible = false" />
-        <p-button label="Save" (onClick)="modalVisible = false" />
-    </div>
+<p-dialog header="Nueva Reserva" [modal]="true" [draggable]="false" [(visible)]="modalVisible"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false"
+    [resizable]="false">
+    <form>
+        <div class="grid">
+            
+            <div class="col-12 md:col-6">
+                <label for="username">Fecha de entrada</label>
+                <p-calendar #fechaHastaRef="ngModel" inputId="fechaHastaId" [showTime]="false" [showSeconds]="true"
+                name="fechaHasta"  placeholder="Seleccione ..."
+                [(ngModel)]="dataTranferForm.data.checkInDate" appendTo="body" styleClass="w-full"
+                [ngClass]="{'ng-invalid ng-dirty': fechaHastaRef.invalid && fechaHastaRef.touched}" [showIcon]="true"
+                dateFormat="dd/mm/yy" [readonlyInput]="false" [required]="true">
+              </p-calendar>
+            </div>
+            <div class="col-12 md:col-6">
+                <label for="username">Fecha de salida</label>
+                <p-calendar #fechaSalidaRef="ngModel" inputId="fechaSalidaId" [showTime]="false" [showSeconds]="true"
+                name="fechaSalida"  placeholder="Seleccione ..."
+                [(ngModel)]="dataTranferForm.data.checkOutDate" appendTo="body" styleClass="w-full"
+                [ngClass]="{'ng-invalid ng-dirty': fechaSalidaRef.invalid && fechaSalidaRef.touched}" [showIcon]="true"
+                dateFormat="dd/mm/yy" [readonlyInput]="false" [required]="true">
+              </p-calendar>
+            </div>
+            <div class="col-12 md:col-6">
+                <label for="username">Cant. Huéspedes</label>
+                <input type="number" name="cantidadHuespedes" pInputText id="username" class="w-full" [(ngModel)]="dataTranferForm.data.numberGuests" />
+            </div>
+            <div class="col-12 md:col-6">
+                <label for="username">Tipo de habitación</label>
+                <input type="text" name="tipoHabitaciones" pInputText id="username" class="w-full" [(ngModel)]="dataTranferForm.data.roomType" />
+            </div>
+            <div class="col-12 md:col-6">
+                <label for="username">Descripción</label>
+                <input type="text" pInputText id="username" name="descripcion" class="w-full" [(ngModel)]="dataTranferForm.data.description" />
+            </div>
+
+            <div class="col-12 ">
+                <p-button label="Cancelar" severity="secondary" (onClick)="modalVisible = false" />
+                <p-button class="ml-2" type="button" label="Guardar" (onClick)="onSubmit()" />
+            </div>
+        </div>
+    </form>
 </p-dialog>

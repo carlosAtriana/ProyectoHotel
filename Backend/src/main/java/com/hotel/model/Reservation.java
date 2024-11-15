@@ -10,17 +10,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@Document(collection = "Reservas")
+@Document(collection = "reservation")
 
-public class Reserva {
+public class Reservation {
     @Id
     private String id;
-    private Date fechaEntrada;
-    private Date fechaSalida;
-    private int cantidadHuespedes;
-    private String tipoHabitaciones;
-    private String descripcion; 
-
-
+    private Date checkInDate;
+    private Date checkOutDate;
+    private int numberGuests;
+    private String roomType;
+    private String description;
 
 }

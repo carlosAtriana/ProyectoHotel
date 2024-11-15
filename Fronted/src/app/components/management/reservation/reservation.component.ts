@@ -10,15 +10,27 @@ import { AlertService } from '../../core/services/alert.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { IdataTransferForm } from '../../core/models/data-transfer-form';
+import { IReservation } from '../../core/models/reservation';
+import { Mode } from '../../core/enums/mode';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
+import { ManagementService } from '../../core/services/management.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-reservation',
   standalone: true,
-  imports: [FullCalendarModule, CommonModule, ButtonModule, InputTextModule, DialogModule],
+  imports: [FullCalendarModule, CommonModule, ButtonModule, InputTextModule, DialogModule, CalendarModule,
+    FormsModule
+  ],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.css'
 })
 export class ReservationComponent {
+  listReservations: IReservation[] = [];
+
+  managementService = inject(ManagementService);
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
     plugins: [
@@ -32,6 +44,7 @@ export class ReservationComponent {
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
+    events: this.convertToFullCalendarEvents(this.listReservations),
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this)
@@ -42,6 +55,26 @@ export class ReservationComponent {
     */
   });
   modalVisible: boolean = false;
+  dataTranferForm: IdataTransferForm<IReservation> = {
+    data: {} as IReservation,
+    mode: Mode.none
+  }
+  
+  ngOnInit() {
+    this.getAllReservations();
+  }
+
+  convertToFullCalendarEvents(reservations: IReservation[]): any[] {
+    return reservations.map(reservation => ({
+      title: reservation.description,
+      start: reservation.checkInDate.toISOString(),
+      end: reservation.checkOutDate.toISOString(),
+      extendedProps: {
+        cantidadHuespedes: reservation.numberGuests,
+        tipoHabitaciones: reservation.roomType
+      }
+    }));
+  }
 
   showDialog() {
     this.modalVisible = !this.modalVisible;
@@ -91,5 +124,41 @@ export class ReservationComponent {
 
   handleEvents(events: EventApi[]) {
     this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
+  }
+
+  getAllReservations() {
+    this.managementService.getAllReservations().subscribe({
+      next: (res) => {
+        this.listReservations = res;
+        console.log('data received', this.listReservations);
+      },
+      error: (err) => {
+        console.log('error', err);
+        this.alertService.error(environment.title, 'Error obteniendo las reservas');
+      },
+      complete: () => {
+        console.log('complete');
+      }
+    }
+    );
+  }
+
+  onSubmit() {
+    console.log('submit', this.dataTranferForm.data);
+    this.managementService.createReservation(this.dataTranferForm.data).subscribe({
+      next: (res) => {
+        console.log('success', res);
+        this.alertService.success(environment.title, 'Reserva creada correctamente');
+        this.modalVisible = false;
+      },
+      error: (err) => {
+        console.log('error', err);
+        this.alertService.error(environment.title, 'Error creando la reserva');
+      },
+      complete: () => {
+        console.log('complete');
+      }
+    }
+    );
   }
 }

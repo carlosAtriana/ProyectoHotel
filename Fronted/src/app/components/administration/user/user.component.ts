@@ -7,6 +7,7 @@ import { IdataTransferForm } from '../../core/models/data-transfer-form';
 import { Mode } from '../../core/enums/mode';
 import { Validators } from '@angular/forms';
 import { UserInputFieldsComponent } from "./user-input-fields/user-input-fields.component";
+import { IUser } from '../../core/models/user';
 
 @Component({
   selector: 'app-user',
@@ -16,33 +17,27 @@ import { UserInputFieldsComponent } from "./user-input-fields/user-input-fields.
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  dataTransferForm: IdataTransferForm<any> = {
-    data: {} as any,
+  dataTransferForm: IdataTransferForm<IUser> = {
+    data: {} as IUser,
     mode: Mode.none
   }
-  mode: typeof Mode= Mode;
+  mode: typeof Mode = Mode;
 
-  title:any[] = ['Nombre', 'Apellido', 'Sexo']
-
+  title: any[] = ['Nombre', 'Apellido', 'Sexo']
   body: any = [
-      {Nombre: 'Carlos', Apellido: 'Triana', Sexo: 'masculino'},
-      {Nombre: 'Juana', Apellido: 'Martinez', Sexo: 'femenino'},
-      {Nombre: 'SOfia', Apellido: 'Gonzales', Sexo: 'femenino'},
-      {Nombre: 'Jancho ', Apellido: 'Piñeres', Sexo: 'Masculino'},
+    { Nombre: 'Carlos', Apellido: 'Triana', Sexo: 'masculino' },
+    { Nombre: 'Juana', Apellido: 'Martinez', Sexo: 'femenino' },
+    { Nombre: 'SOfia', Apellido: 'Gonzales', Sexo: 'femenino' },
+    { Nombre: 'Jancho ', Apellido: 'Piñeres', Sexo: 'Masculino' },
   ]
 
-  onNew(){
+  onNew() {
     this.dataTransferForm.mode = Mode.new;
   }
 
-  onCancel(){
-    delete this.dataTransferForm.data;
+  onCancel() {
+    this.dataTransferForm.data;
     this.dataTransferForm.mode = Mode.none;
   }
- 
-  formFields = [
-    { type: 'text', label: 'Nombre', name: 'nombre', validations: [Validators.required] },
-    { type: 'email', label: 'Correo Electrónico', name: 'email', validations: [Validators.required, Validators.email] },
-    { type: 'number', label: 'Edad', name: 'edad', validations: [Validators.required, Validators.min(18)] }
-  ];
+
 }

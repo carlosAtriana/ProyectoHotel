@@ -1,4 +1,6 @@
 export const environment = {
+    title: 'Hotel la Sierra',
+    apiURL : 'http://localhost:8080/api',
     menu: [
         {
             label: 'Inicio',
