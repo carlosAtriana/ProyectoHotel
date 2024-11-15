@@ -2,8 +2,10 @@ package com.hotel.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hotel.model.Customer;
 import com.hotel.model.Reservation;
 import com.hotel.repository.ReservationRepository;
 
@@ -12,6 +14,7 @@ public class ReservationService {
     
     private final ReservationRepository reservationRepository;
 
+    @Autowired
     public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
@@ -27,6 +30,12 @@ public class ReservationService {
     public void deleteReservation(String id) {
         reservationRepository.deleteById(id);
     }
+
+    public Reservation getReservationById(String id) {
+        return reservationRepository.findById(id).orElse(null);
+
+    }
+
 
     
 }
