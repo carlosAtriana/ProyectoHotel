@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hotel.model.Customer;
 import com.hotel.model.Reservation;
+import com.hotel.repository.CustomerRepository;
 import com.hotel.repository.ReservationRepository;
 
 @Service
@@ -13,6 +15,8 @@ public class ReservationService {
     
     private final ReservationRepository reservationRepository;
     private final CounterService counterService;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Autowired
     public ReservationService(ReservationRepository reservationRepository, CounterService counterService) {
@@ -24,16 +28,29 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public Reservation createReservation(Reservation reservation) {
-        // Si no tiene un número secuencial asignado, obtenemos el siguiente valor del contador
+
+
+    public Reservation createReservation(Reservation reservation, String customerId) {
+
+        Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+
         if (reservation.getSequential() == null) {
             // Llamamos al servicio de contador para obtener el siguiente valor 
             long nextSequential = counterService.getNextSequential("reservation");
-            reservation.setSequential(nextSequential); // Asignamos el valor secuencial a la reserva
+            reservation.setSequential(nextSequential); 
         }
+        reservation.setCustomerId(customer.getId());
 
-        // Guardamos la reserva en la base de datos
         return reservationRepository.save(reservation);
+
+
+    }
+
+
+    public void updateReservation(Reservation reservation) {
+        reservationRepository.save(reservation); 
     }
 
     public void deleteReservation(String id) {
@@ -43,4 +60,10 @@ public class ReservationService {
     public Reservation getReservationById(String id) {
         return reservationRepository.findById(id).orElse(null);
     }
+
+
+    public List<Reservation> getReservationsByCustomerId(String customerId) {
+        return reservationRepository.findByCustomerId(customerId);
+    }
+
 }

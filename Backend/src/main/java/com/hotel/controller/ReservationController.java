@@ -21,6 +21,11 @@ public class ReservationController {
 
     }
 
+    @GetMapping("/customer/{customerId}")
+    public List<Reservation> getReservationsByCustomerId(@PathVariable String customerId) {
+        return reservationService.getReservationsByCustomerId(customerId);
+    }
+
     @GetMapping
     public List<Reservation> getAllReservations() {
         return reservationService.getAllReservation();
@@ -28,8 +33,10 @@ public class ReservationController {
     
 
     @PostMapping
-    public Reservation createReservation(@RequestBody Reservation reservation) {
-        return reservationService.createReservation(reservation);
+    public Reservation createReservation(@RequestBody Reservation reservation, @RequestParam String customerId) {
+        // Pasamos la reserva y el customerId al servicio
+        reservation.setCustomerId(customerId);
+        return reservationService.createReservation(reservation, customerId);
     }
 
     @PutMapping("/{id}")
@@ -60,7 +67,7 @@ public class ReservationController {
             }
 
             
-            reservationService.createReservation(reservationSearched);
+            reservationService.updateReservation(reservationSearched);
         }
         
 
