@@ -33,10 +33,8 @@ public class ReservationController {
     
 
     @PostMapping
-    public Reservation createReservation(@RequestBody Reservation reservation, @RequestParam String customerId) {
-        // Pasamos la reserva y el customerId al servicio
-        reservation.setCustomerId(customerId);
-        return reservationService.createReservation(reservation, customerId);
+    public Reservation createReservation(@RequestBody Reservation reservation) {
+        return reservationService.createReservation(reservation);
     }
 
     @PutMapping("/{id}")

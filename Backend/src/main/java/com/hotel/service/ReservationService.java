@@ -30,10 +30,10 @@ public class ReservationService {
 
 
 
-    public Reservation createReservation(Reservation reservation, String customerId) {
+    public Reservation createReservation(Reservation reservation) {
 
-        Customer customer = customerRepository.findById(customerId)
-            .orElseThrow(() -> new RuntimeException("Customer not found"));
+        customerRepository.findById(reservation.getCustomerId())
+        .orElseThrow(() -> new RuntimeException("Customer not found"));
 
 
         if (reservation.getSequential() == null) {
@@ -41,7 +41,7 @@ public class ReservationService {
             long nextSequential = counterService.getNextSequential("reservation");
             reservation.setSequential(nextSequential); 
         }
-        reservation.setCustomerId(customer.getId());
+        
 
         return reservationRepository.save(reservation);
 

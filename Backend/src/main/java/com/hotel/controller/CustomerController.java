@@ -26,9 +26,9 @@ public class CustomerController {
 
     @PostMapping
     public Customer createCustomer(@RequestBody Customer customer){
-        
         return customerService.createCustomer(customer);
     }
+
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable String id){
         return customerService.getCustomerById(id);
