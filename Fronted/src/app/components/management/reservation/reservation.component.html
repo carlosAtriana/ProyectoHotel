@@ -1,52 +1,54 @@
 <div class='demo-app-main' style="width: 70rem;">
     <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
         <ng-template #eventContent let-arg>
-            <b>{{ arg.timeText }}</b>
             <i>{{ arg.event.title }}</i>
         </ng-template>
     </full-calendar>
 </div>
-
-<p-dialog header="Nueva Reserva" [modal]="true" [draggable]="false" [(visible)]="modalVisible"
-    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [draggable]="false"
-    [resizable]="false">
-    <form>
+<p-dialog header="{{headerDialog}}" appendTo="body" [modal]="true" [draggable]="false" [(visible)]="modalVisible"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [resizable]="false">
+    <form #ngForm="ngForm">
         <div class="grid">
-            
             <div class="col-12 md:col-6">
                 <label for="username">Fecha de entrada</label>
-                <p-calendar #fechaHastaRef="ngModel" inputId="fechaHastaId" [showTime]="false" [showSeconds]="true"
-                name="fechaHasta"  placeholder="Seleccione ..."
-                [(ngModel)]="dataTranferForm.data.checkInDate" appendTo="body" styleClass="w-full"
-                [ngClass]="{'ng-invalid ng-dirty': fechaHastaRef.invalid && fechaHastaRef.touched}" [showIcon]="true"
-                dateFormat="dd/mm/yy" [readonlyInput]="false" [required]="true">
-              </p-calendar>
+                <p-calendar #fechaHastaRef="ngModel" showButtonBar="true" inputId="fechaHastaId" [showTime]="false"
+                    [showSeconds]="true" name="fechaHasta" placeholder="Seleccione ..."
+                    [(ngModel)]="dataTranferForm.data.checkInDate" appendTo="body" styleClass="w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': fechaHastaRef.invalid && fechaHastaRef.touched}"
+                    [showIcon]="true" dateFormat="yy/mm/dd" [readonlyInput]="true" [required]="true">
+                </p-calendar>
             </div>
             <div class="col-12 md:col-6">
                 <label for="username">Fecha de salida</label>
-                <p-calendar #fechaSalidaRef="ngModel" inputId="fechaSalidaId" [showTime]="false" [showSeconds]="true"
-                name="fechaSalida"  placeholder="Seleccione ..."
-                [(ngModel)]="dataTranferForm.data.checkOutDate" appendTo="body" styleClass="w-full"
-                [ngClass]="{'ng-invalid ng-dirty': fechaSalidaRef.invalid && fechaSalidaRef.touched}" [showIcon]="true"
-                dateFormat="dd/mm/yy" [readonlyInput]="false" [required]="true">
-              </p-calendar>
+                <p-calendar #fechaSalidaRef="ngModel" showButtonBar="true" inputId="fechaSalidaId" [showTime]="false"
+                    [showSeconds]="true" name="fechaSalida" placeholder="Seleccione ..."
+                    [(ngModel)]="dataTranferForm.data.checkOutDate" appendTo="body" styleClass="w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': fechaSalidaRef.invalid && fechaSalidaRef.touched}"
+                    [showIcon]="true" dateFormat="yy/mm/dd" [readonlyInput]="false" [required]="true">
+                </p-calendar>
             </div>
             <div class="col-12 md:col-6">
                 <label for="username">Cant. Huéspedes</label>
-                <input type="number" name="cantidadHuespedes" pInputText id="username" class="w-full" [(ngModel)]="dataTranferForm.data.numberGuests" />
+                <input type="number" name="cantidadHuespedes" pInputText id="username" class="w-full"
+                    [(ngModel)]="dataTranferForm.data.numberGuests" />
             </div>
             <div class="col-12 md:col-6">
                 <label for="username">Tipo de habitación</label>
-                <input type="text" name="tipoHabitaciones" pInputText id="username" class="w-full" [(ngModel)]="dataTranferForm.data.roomType" />
+                <input type="text" name="tipoHabitaciones" pInputText id="username" class="w-full"
+                    [(ngModel)]="dataTranferForm.data.roomType" />
             </div>
             <div class="col-12 md:col-6">
                 <label for="username">Descripción</label>
-                <input type="text" pInputText id="username" name="descripcion" class="w-full" [(ngModel)]="dataTranferForm.data.description" />
+                <input type="text" pInputText id="username" name="descripcion" class="w-full"
+                    [(ngModel)]="dataTranferForm.data.description" />
             </div>
 
             <div class="col-12 ">
-                <p-button label="Cancelar" severity="secondary" (onClick)="modalVisible = false" />
-                <p-button class="ml-2" type="button" label="Guardar" (onClick)="onSubmit()" />
+                <p-button [severity]="dataTranferForm.mode === 'edit' ? 'warning' : null" label="{{textButtonDialog}}"
+                    (onClick)="onCreateUpdateReservation()" />
+                @if (dataTranferForm.mode == 'edit' ) {
+                <p-button label="Eliminar" class="ml-2" severity="danger" (onClick)="delelteReservation(dataTranferForm.data)" />
+                }
             </div>
         </div>
     </form>

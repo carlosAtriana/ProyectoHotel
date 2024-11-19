@@ -264,14 +264,11 @@ export class CustomerComponent {
     this.administrationService.getAllCuestomer().subscribe({
       next: (data)=>{
         this.listCustomers = data;
-       console.log(data);
-
       },
       error: (error)=>{
         this.alertService.error(environment.title, error.error.message);
       },
       complete: ()=>{
-        console.log('complete');
       }
     });
   }
@@ -286,7 +283,6 @@ export class CustomerComponent {
         this.alertService.error(environment.title, error.error.message);
       },
       complete: ()=>{
-        console.log('complete');
       }
     });
   }
