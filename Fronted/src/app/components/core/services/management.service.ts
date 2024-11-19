@@ -21,7 +21,11 @@ export class ManagementService {
     return this.http.post<IReservation>(this.apiURL + '/reservations', reservation)
   }
 
-  deleteReservation(id: number): Observable<any> {
+  updateReservation(reservation: IReservation): Observable<IReservation> {
+    return this.http.put<IReservation>(this.apiURL + '/reservations/' + reservation.id, reservation)
+  }
+
+  deleteReservation(id: string): Observable<any> {
     return this.http.delete(this.apiURL + '/reservations/' + id)
   }
 }

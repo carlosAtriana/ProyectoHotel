@@ -44,7 +44,6 @@ export class DynamicTableComponent {
   }
   onEdit(data: any): void {
     this.edit.emit(data);
-    console.log(data);
   }
 
   onDelete(data: any): void {
@@ -55,6 +54,5 @@ export class DynamicTableComponent {
           this.delete.emit(data);
         }
       });
-      console.log(data);
   }
 }
