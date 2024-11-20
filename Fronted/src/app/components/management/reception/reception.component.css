@@ -1,0 +1,75 @@
+.room-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+.room-card {
+  position: relative;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-size: cover;
+  background-position: center;
+  height: 150px;
+  overflow: hidden;
+}
+
+.room-card.available {
+  background-color: #28a745; /* Verde */
+  color: white;
+}
+
+.room-card.occupied {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+}
+
+/* Contenedor principal del contenido */
+.room-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+/* Información de la habitación */
+.room-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.room-info h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.room-info p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Imagen de la tarjeta */
+.room-image {
+  max-height: 70%;
+  max-width: 30%;
+  align-self: center;
+}
+
+/* Estado de la habitación */
+.room-status {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: auto;
+}
