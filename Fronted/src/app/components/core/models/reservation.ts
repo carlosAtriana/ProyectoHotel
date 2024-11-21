@@ -6,4 +6,5 @@ export interface IReservation {
   numberGuests: number;
   roomType: string;
   description: string;
+  customerId: string;
 }

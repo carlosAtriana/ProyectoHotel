@@ -15,8 +15,6 @@ public class ReservationService {
     
     private final ReservationRepository reservationRepository;
     private final CounterService counterService;
-    @Autowired
-    private CustomerRepository customerRepository;
 
     @Autowired
     public ReservationService(ReservationRepository reservationRepository, CounterService counterService) {
@@ -31,23 +29,13 @@ public class ReservationService {
 
 
     public Reservation createReservation(Reservation reservation) {
-
-        customerRepository.findById(reservation.getCustomerId())
-        .orElseThrow(() -> new RuntimeException("Customer not found"));
-
-
         if (reservation.getSequential() == null) {
-            // Llamamos al servicio de contador para obtener el siguiente valor 
+            // Llamamos al servicio de contador para obtener el siguiente valor
             long nextSequential = counterService.getNextSequential("reservation");
-            reservation.setSequential(nextSequential); 
+            reservation.setSequential(nextSequential);
         }
-        
-
         return reservationRepository.save(reservation);
-
-
     }
-
 
     public void updateReservation(Reservation reservation) {
         reservationRepository.save(reservation); 

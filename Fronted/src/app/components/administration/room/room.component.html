@@ -9,7 +9,7 @@
     <app-room-input-fields [dataTransferForm]="dataTransferForm" (cancelar)="onCancel()"/>
 }
 @if (dataTransferForm && dataTransferForm.mode == mode.none) {
-    <app-dynamic-table [titleColumn]="title" [body]="data"/>
+    <app-dynamic-table [titleColumn]="title" [data]="data"/>
 }
 
 

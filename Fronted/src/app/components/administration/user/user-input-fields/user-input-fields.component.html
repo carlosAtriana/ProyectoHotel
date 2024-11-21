@@ -1,24 +1,74 @@
 <p-accordion>
-    <p-accordionTab header="{{inputHeader}}" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
+   <p-accordionTab header="{{inputHeader}}" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
        <form #form="ngForm">
-          <div class="grid">
-             <div class="col-12 md:col-6">
-                <label for="nombreId">Nombre activo<span class="text-danger">*</span></label>
-                <input id="nombreId" pInputText type="text" name="nombre" class="w-full" placeholder="Nombre Activo"
-                   maxlength="100" required>
-             </div>
-          </div>
-          <div class="col-12 formgroup-inline">
-             <div class="field">
-                <button type="button" pButton label="Cancelar" class="p-button-outlined" (click)="onCancelar()"></button>
-             </div>
-             <div class="field">
-                <button type="button" pButton label="Guardar"  class="colorButton"
-                   (click)="onAceptar()"></button>
-             </div>
-          </div>
+
+           <div class="grid">
+               <div class="col-12 md:col-6">
+                   <label for="userName">Nombre de usuario<span class="text-danger">*</span></label>
+                   <input #userNameRef="ngModel" name="usuario" type="text"
+                       [(ngModel)]="dataTransferForm.data.userName" pInputText
+                       [ngClass]="{'ng-invalid ng-dirty': userNameRef.invalid && userNameRef.touched}" 
+                       required placeholder="Nombre de usuario" class="w-full"  />
+                   @if (userNameRef.invalid && userNameRef.touched) {
+                   <small class="warning-message-small">Se debe ingresar un nombre de usuario</small>
+                   }
+               </div>
+               <div class="col-12 md:col-6">
+                   <label for="name">Nombre<span class="text-danger">*</span></label>
+                   <input #nameRef="ngModel" [ngModelOptions]="{ standalone: true }" type="text" [(ngModel)]="dataTransferForm.data.name"
+                       pInputText [ngClass]="{'ng-invalid ng-dirty': nameRef.invalid && nameRef.touched}" required
+                       placeholder="Nombre" class="w-full"  />
+                   @if ( nameRef.invalid && nameRef.touched) {
+                   <small class="warning-message-small">Se debe ingresar un nombre</small>
+                   }
+               </div>
+               <div class="col-12 md:col-6">
+                   <label for="lastName">Apellido<span class="text-danger">*</span></label>
+                   <input #lastnameRef="ngModel" id="lastName" name="lastName" type="text"
+                       [(ngModel)]="dataTransferForm.data.lastName" pInputText [ngClass]="{'ng-invalid ng-dirty': lastnameRef.invalid 
+               && lastnameRef.touched}" required placeholder="Apellido" class="w-full" />
+                   @if ( lastnameRef.invalid && lastnameRef.touched) {
+                   <small class="warning-message-small">Se debe ingresar un apellido</small>
+                   }
+               </div>
+               <div class="col-12 md:col-6">
+                   <label for="email">Correo electrónico<span class="text-danger">*</span></label>
+                   <input #emailRef="ngModel" id="email" name="email" type="text"
+                       [(ngModel)]="dataTransferForm.data.email" pInputText
+                       [ngClass]="{'ng-invalid ng-dirty': emailRef.invalid && emailRef.touched}" required
+                       placeholder="Correo electrónico" class="w-full"
+                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" />
+                   @if (emailRef.invalid && emailRef.touched) {
+                   <small class="warning-message-small">Se debe ingresar un correo electrónico</small>
+                   }
+               </div>
+               <div class="col-12 md:col-6">
+                <label for="rol">Rol<span class="text-danger">*</span></label>
+                <p-dropdown #rolRef="ngModel" id="rol" class="w-full" [style]="{'width': '100%'}" [options]="rolesOptions"
+                    [(ngModel)]="rolSelected" name="rol" optionLabel="name"
+                    placeholder="Rol" [required]="true" appendTo="body"></p-dropdown>
+                @if (rolRef.invalid && rolRef.touched) {
+                <small class="warning-message-small">Se debe seleccionar un Rol</small>
+                }
+            </div>
+               <div class="field col-12 md:col-6">
+                   <label for="active">Activo</label>
+                   <p-checkbox  inputId="active" name="active" [binary]="true" class="w-full"
+                       [(ngModel)]="dataTransferForm.data.active">
+                   </p-checkbox>
+               </div>
+           </div>
+
+           <div class="col-12 formgroup-inline">
+               <div class="field">
+                   <button label="Cancelar" pButton type="button" (click)="onCancelar()"
+                       class="p-button-outlined "></button>
+               </div>
+               <div class="field">
+                   <button class="colorButton" [label]="labelButton" pButton type="button" [disabled]="form.invalid"
+                       (click)="onAceptar()"></button>
+               </div>
+           </div>
        </form>
-    </p-accordionTab>
- </p-accordion>
- 
- 
+   </p-accordionTab>
+</p-accordion>

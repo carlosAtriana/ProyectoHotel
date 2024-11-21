@@ -6,10 +6,11 @@
 <hr class="border border-top">
  
 @if (dataTransferForm && dataTransferForm.mode != mode.none) {
-    <app-customer-input-fields [dataTransferForm]="dataTransferForm" (cancelar)="onCancel()"/>
+    <app-customer-input-fields [dataTransferForm]="dataTransferForm" (add)="createCustomer($event)" 
+    (update)="update($event)" (cancelar)="noneMode()"/>
 }
 @if (dataTransferForm && dataTransferForm.mode == mode.none) {
-    <app-dynamic-table  [body]="listCustomers" />
+    <app-customer-list  [listCustomers]="listCustomers" (update)="onUpdate($event)" (delete)="onDelete($event)"/>
 }
 
 

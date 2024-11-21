@@ -4,6 +4,8 @@ package com.hotel.controller;
 import com.hotel.model.User;
 import com.hotel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,14 +37,30 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public void UpdateUser(@RequestBody User user, @PathVariable String id){
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String id) {
+        // Buscar el usuario existente
         User userBuscar = userService.getUserById(id);
-        User userAux;
-        if(userBuscar.getId() == id){
-            user.setName(userBuscar.getName());
-            userAux = userService.createUser(user);
+
+        if (userBuscar == null) {
+            // Si el usuario no existe, devuelve un error 404
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(null);
         }
+        // Actualizar los campos necesarios
+        userBuscar.setId(user.getId());
+        userBuscar.setUserName(user.getUserName());
+        userBuscar.setName(user.getName()); // Asumiendo que deseas actualizar el nombre
+        userBuscar.setLastName(user.getLastName());
+        userBuscar.setFullName(user.getFullName());
+        userBuscar.setEmail(user.getEmail());
+        userBuscar.setActive(user.getActive());
+        userBuscar.setRol(user.getRol());
+        User updatedUser = userService.createUser(userBuscar);
+
+        // Retornar el usuario actualizado
+        return ResponseEntity.ok(updatedUser);
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id){

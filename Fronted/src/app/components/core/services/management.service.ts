@@ -18,6 +18,7 @@ export class ManagementService {
   }
 
   createReservation(reservation: IReservation): Observable<IReservation> {
+    console.log("creando reserva", reservation);
     return this.http.post<IReservation>(this.apiURL + '/reservations', reservation)
   }
 

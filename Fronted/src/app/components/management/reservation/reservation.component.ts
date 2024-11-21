@@ -16,12 +16,13 @@ import { FormsModule } from '@angular/forms';
 import { ManagementService } from '../../core/services/management.service';
 import { environment } from '../../../../environments/environment';
 import { EventoRutina } from '../../core/models/envento-rutina';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-reservation',
   standalone: true,
   imports: [FullCalendarModule, CommonModule, ButtonModule, InputTextModule, DialogModule, CalendarModule,
-    FormsModule
+    FormsModule, DropdownModule
   ],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.css'
@@ -57,6 +58,8 @@ export class ReservationComponent {
     eventChange:
     eventRemove:
     */
+    eventMouseEnter: this.handleMouseEnter.bind(this),
+    eventMouseLeave: this.handleMouseLeave.bind(this),
   });
   modalVisible: boolean = false;
   dataTranferForm: IdataTransferForm<IReservation> = {
@@ -66,9 +69,35 @@ export class ReservationComponent {
   listReservations: IReservation[] = [];
   headerDialog: string = '';
   textButtonDialog: string = '';
+  eventInfo: any;
+  eventTitle: any;
+  eventStart: any;
 
   ngOnInit() {
     this.getAllReservations();
+  }
+
+  handleMouseEnter(info: any) {
+    console.log("mouseenter", info);
+    this.eventInfo = info.event.extendedProps;
+    this.eventTitle = info.event._def.title;
+    this.eventStart = info.event.start;
+    const eventInfoEl = document.getElementById('eventInfo');
+    if (eventInfoEl) {      
+      const eventRect = info.el.getBoundingClientRect();            
+      const topPosition = eventRect.bottom + window.scrollY;
+      const leftPosition = eventRect.left + window.scrollX;
+  
+      eventInfoEl.style.display = 'block';
+      eventInfoEl.style.top = `${topPosition}px`;
+      eventInfoEl.style.left = `${leftPosition}px`;
+    }
+  }
+  handleMouseLeave(info: any) {
+    const eventInfoEl = document.getElementById('eventInfo');
+    if (eventInfoEl) {
+      eventInfoEl.style.display = 'none';
+    }
   }
 
   showDialog(dataTranferForm: IdataTransferForm<IReservation>): void {
@@ -79,7 +108,6 @@ export class ReservationComponent {
       this.headerDialog = 'Editar Reserva';
       this.textButtonDialog = 'Actualizar';
   
-      console.log("data", dataTranferForm.data)
       // Clonar el objeto para evitar modificar el original (inmutable)
       const clonedData = { ...dataTranferForm.data };
       
@@ -89,14 +117,13 @@ export class ReservationComponent {
         clonedData.checkOutDate = new Date(dataTranferForm.data.checkOutDate);
       } else {
         clonedData.checkOutDate = null!; // O cualquier valor predeterminado
-      }
-      console.log("saf", clonedData.checkInDate, clonedData.checkOutDate)
-  
+      }  
       // Asignar la copia modificada al formulario
       dataTranferForm.data = clonedData;
+    }else if (dataTranferForm.mode === Mode.none) {
+      this.modalVisible = false;
     }
     this.modalVisible = true;
-    this.dataTranferForm = dataTranferForm;
   }
   
   managementService = inject(ManagementService);
@@ -195,6 +222,7 @@ export class ReservationComponent {
           checkOutDate: reservation.checkOutDate,
           numberGuests: reservation.numberGuests,
           roomType: reservation.roomType,
+          customerId: reservation.customerId,
           description: reservation.description,
         }
       };
@@ -203,17 +231,21 @@ export class ReservationComponent {
   }
   onCreateUpdateReservation() {
     if (this.dataTranferForm.mode === Mode.new) {
-      this.dataTranferForm.data.checkInDate.setUTCHours(0, 0, 0, 0);
-      this.dataTranferForm.data.checkOutDate.setUTCHours(0, 0, 0, 0);
+      if(this.dataTranferForm.data.checkOutDate != null && this.dataTranferForm.data.checkOutDate != undefined){
+        this.dataTranferForm.data.checkInDate.setUTCHours(0, 0, 0, 0);
+        this.dataTranferForm.data.checkOutDate.setUTCHours(0, 0, 0, 0);
+      }
+
       this.managementService.createReservation(this.dataTranferForm.data).subscribe({
-        next: (res) => {
+        next: () => {
           this.alertService.success(environment.title, 'Reserva creada correctamente');
-          this.modalVisible = false;
         },
         error: (err) => {
-          this.alertService.error(environment.title, 'Error creando la reserva');
+          this.alertService.error(environment.title, `Error creando la reserva ${err.error.message}`);
+          this.modalVisible = false;
         },
         complete: () => {
+          this.modalVisible = false;
           this.getAllReservations();
         }
       }

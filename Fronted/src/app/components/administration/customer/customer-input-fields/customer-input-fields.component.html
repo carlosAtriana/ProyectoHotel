@@ -3,17 +3,22 @@
        <form #form="ngForm">
           <div class="grid">
              <div class="col-12 md:col-6">
-                <label for="nombreId">Nombre activo<span class="text-danger">*</span></label>
-                <input id="nombreId" pInputText type="text" name="nombre" class="w-full" placeholder="Nombre Activo"
-                   maxlength="100" required>
+                <label for="nombreId">Nombre<span class="text-danger">*</span></label>
+                <input id="nombreId" [(ngModel)]="dataTransferForm.data.name" pInputText type="text" 
+                  name="nombre" class="w-full" placeholder="Nombre cliente" maxlength="100" required>
              </div>
+             <div class="col-12 md:col-6">
+               <label for="email">Email<span class="text-danger">*</span></label>
+               <input id="email" [(ngModel)]="dataTransferForm.data.email" pInputText type="text" 
+                 name="email" class="w-full" placeholder="Correo" maxlength="100" required>
+            </div>
           </div>
           <div class="col-12 formgroup-inline">
              <div class="field">
                 <button type="button" pButton label="Cancelar" class="p-button-outlined" (click)="onCancelar()"></button>
              </div>
              <div class="field">
-                <button type="button" pButton label="Guardar"  class="colorButton"
+                <button type="button" pButton label="{{buttonLabel}}"  class="colorButton"
                    (click)="onAceptar()"></button>
              </div>
           </div>

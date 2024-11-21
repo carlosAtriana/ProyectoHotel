@@ -42,6 +42,17 @@
                 <input type="text" pInputText id="username" name="descripcion" class="w-full"
                     [(ngModel)]="dataTranferForm.data.description" />
             </div>
+            <div class="col-12 md:col-6">
+                <label for="customerId">Cliente</label>
+                <!-- <input type="text" pInputText id="customerId"name="customerId" class="w-full"
+                    [(ngModel)]="dataTranferForm.data.customerId" /> -->
+                    <!-- [options]="items"
+                    [(ngModel)]="selectedItem" -->
+                    <p-dropdown 
+                    placeholder="Select Item"
+                    [virtualScroll]="true" styleClass="w-full"
+                    [virtualScrollItemSize]="38" appendTo="body"/>
+            </div>
 
             <div class="col-12 ">
                 <p-button [severity]="dataTranferForm.mode === 'edit' ? 'warning' : null" label="{{textButtonDialog}}"
@@ -50,6 +61,25 @@
                 <p-button label="Eliminar" class="ml-2" severity="danger" (onClick)="delelteReservation(dataTranferForm.data)" />
                 }
             </div>
+
         </div>
     </form>
 </p-dialog>
+
+<div id="eventInfo" class="event-info" *ngIf="eventInfo">
+    <table>
+      <tr>
+        <td class="colorDiv">Cliente:</td>
+        <td>{{eventTitle}}</td>
+      </tr>
+      <tr>
+        <td class="colorDiv">Fecha reserva [día/mes/año]:</td>
+        <td>{{eventStart | date:'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr>
+        <td class="colorDiv">Tipo:</td>
+        <td>{{eventInfo.roomType}}</td>
+      </tr>
+    
+    </table>
+  </div>

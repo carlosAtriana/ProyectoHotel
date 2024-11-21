@@ -29,7 +29,7 @@ import { CommonModule } from '@angular/common';
 export class DynamicTableComponent {
   @ViewChild('dt') dt: Table | undefined;
   @Input() titleColumn: any[] = [];
-  @Input() body: any[] = [];
+  @Input() data: any[] = [];
   @Input() titleTable: string = '';
   @Output() edit: EventEmitter<any> = new EventEmitter<any>();
   @Output() delete: EventEmitter<any> = new EventEmitter<any>();

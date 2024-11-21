@@ -21,7 +21,6 @@ public class Reservation {
     private Integer numberGuests;
     private String roomType;
     private String description;
-
     private String customerId;
 
 }

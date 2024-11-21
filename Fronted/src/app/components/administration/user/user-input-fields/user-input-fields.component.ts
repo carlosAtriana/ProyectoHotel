@@ -6,78 +6,91 @@ import { Mode } from '../../../core/enums/mode';
 import { AlertService } from '../../../core/services/alert.service';
 import { IdataTransferForm } from '../../../core/models/data-transfer-form';
 import { ButtonModule } from 'primeng/button';
+import { environment } from '../../../../../environments/environment';
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
+import { CalendarModule } from 'primeng/calendar';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { AdministrationService } from '../../../core/services/administration.service';
+import { IUser } from '../../../core/models/user';
+
+interface roleDTO {
+    name: string;
+}
 
 @Component({
   selector: 'app-user-input-fields',
   standalone: true,
-  imports: [AccordionModule, InputTextModule, FormsModule, ButtonModule],
+  imports: [AccordionModule, FormsModule, CommonModule, InputTextModule, MultiSelectModule, DropdownModule,
+    CalendarModule, CheckboxModule, ButtonModule,],
   templateUrl: './user-input-fields.component.html',
   styleUrl: './user-input-fields.component.css'
 })
 export class UserInputFieldsComponent {
-
   @ViewChild('form') form!: NgForm;
-  @Input() dataTransferForm: IdataTransferForm<any> = {} as IdataTransferForm<any>;
-  @Output() update: EventEmitter<any> = new EventEmitter<any>();
-  @Output() add: EventEmitter<any> = new EventEmitter<any>();
+  @Input() dataTransferForm: IdataTransferForm<IUser> = {} as IdataTransferForm<IUser>;
+  @Output() add: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() update: EventEmitter<IUser> = new EventEmitter<IUser>();
   @Output() cancelar: EventEmitter<void> = new EventEmitter<void>();
-  private _initData: any = {} as any;
+  private _initData: IUser = {} as IUser;
   toggleInputs: boolean = true;
   inputHeader: string = "Nuevo";
-  buttonLabel : string = ""
-
-  campos: any[] = [
-    {label: "Nombre", name: "nombre", type: "text", required: true, placeholder: "Ingrese el nombre", model:"nombre"}, 
-    {label: "Descripción", name: "descripcion", type: "number", required: true, placeholder: "Ingrese la descripción", model: "descripcion"}, 
-    {label: "Fecha de Instalación", name: "fechaInstalacion", type: "date", required: true, placeholder: "Seleccione la fecha de instalación", model: "fecha"},
-  ];
+  labelButton: string = "Aceptar";
+  rolesOptions: roleDTO[] = [{ name: 'Administrador' }, { name: 'Cliente' }, { name: 'Empleado' }];
+  rolSelected: roleDTO = {} as roleDTO;
 
   alertService = inject(AlertService);
+  administrationService = inject(AdministrationService);
 
   ngOnChanges(changes: SimpleChanges): void {
-    const dataTransferForm = changes['dataTransferForm'].currentValue;
+    const dataTransferForm = changes['dataTransferForm']?.currentValue;
+    // if (dataTransferForm) {
     const { mode, data } = dataTransferForm;
     switch (mode) {
-      case Mode.edit:       
-        this.inputHeader = "Editar"
-        this.buttonLabel = "Editar"
+      case Mode.new:
         this.toggleInputs = true;
-        // data.fechaInstalacion = (typeof data.fechaInstalacion === "string") ? moment(data.fechaInstalacion).toDate() : data.fechaInstalacion;
-        this._initData = Object.assign({}, data);
+        this.inputHeader = 'Nuevo Usuario';
+        this.labelButton = 'Aceptar';
         break;
-      case Mode.new:   
+      case Mode.edit:
+        console.log("hola", this.dataTransferForm.data.rol)
+        this._initData = {...data};
+        this.rolSelected.name = data.rol;
+        this.inputHeader = 'Editar Usuario';
+        this.labelButton = 'Editar';
         this.toggleInputs = true;
-        this.inputHeader = "Nuevo";
-        this.buttonLabel = "Aceptar"
         break;
     }
-
   }
 
   onAceptar(): void {
-    const value = this.dataTransferForm.data;
-
-    switch (this.dataTransferForm.mode) {
+    const { data: currentData, mode } = this.dataTransferForm;
+    switch (mode) {
+      case Mode.new:
+        currentData.fullName = currentData.name + currentData.lastName;
+        currentData.rol = this.rolSelected.name;
+        this.add.emit(currentData);
+        break;
       case Mode.edit:
-        if (JSON.stringify(this._initData) === JSON.stringify(value)) {
+        currentData.fullName = currentData.name + currentData.lastName;
+        currentData.rol = this.rolSelected.name;
+        if (JSON.stringify(this._initData) === JSON.stringify(currentData)) {
           this.onCancelar();
-        } else {          
-          this.alertService.question('hola',
-            `¿Está seguro en editar el activo?.`,
-            'Si','No').then((result:any) => {
-              if (result.isConfirmed){
-                this.update.emit(value);
+        } else {
+          this.alertService
+            .question(
+              environment.title,
+              '¿Está seguro de editar el usuario?.',
+              'Si',
+              'No'
+            )
+            .then((result) => {
+              if (result.isConfirmed) {
+                this.update.emit(currentData);
               }
             });
-
         }
-        break;
-
-      case Mode.new:
-        this.add.emit(value);
-
-        break;
-      case Mode.none:
         break;
     }
   }
@@ -85,8 +98,29 @@ export class UserInputFieldsComponent {
   onCancelar(): void {
     this.cancelar.emit();
   }
+  onGetRolesDropdowns() {
+    this.administrationService.getAllRoles().subscribe({
+      next: (res) => {
+        if (res.isSuccessful) {
+          this.rolesOptions = res.data;
+        } else {
+          this.alertService.error(
+            environment.title,
+            'Se produjo un error al obtener los roles'
+          );
+        }
+      },
+      error: (err) => {
+        this.alertService.error(
+          environment.title,
+          'Se produjo un error al obtener los roles'
+        );
+      },
+    });
+  }
 
- 
+
+
 
   //para opcion de editar un activo----------------------------------
   // assignValuesInEdit() {

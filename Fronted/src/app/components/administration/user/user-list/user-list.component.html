@@ -1,0 +1,54 @@
+<h4>Usuarios</h4>
+<div class="card">
+
+    <p-table [value]="listUsers" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
+        [responsiveLayout]="'scroll'" [autoLayout]="true" [showCurrentPageReport]="true"
+        [globalFilterFields]="['userName','fullName','email', 'roleName']"
+        currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
+        <ng-template pTemplate="caption">
+            <div style="text-align:right; max-width: 100%; width: 100%;">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                        placeholder="Buscar" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Opciones</th>
+                <th>Nombre de usuario
+                    <p-columnFilter type="text" field="userName" display="menu"></p-columnFilter>
+                </th>
+                <th>Nombre <br>completo
+                    <p-columnFilter type="text" field="fullName" display="menu"></p-columnFilter>
+                </th>
+                <th>Correo <br>electrónico
+                    <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                </th>
+                <th>Activo
+                    <p-columnFilter type="text" field="active" display="menu"></p-columnFilter>
+                </th>
+                <th>Rol
+                    <p-columnFilter type="text" field="roles" display="menu"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td class="btn-table-action">
+                    <button pTooltip="Editar" tooltipPosition="right" pButton pRipple type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-text" (click)="onEdit(user)"></button>
+
+                    <button pTooltip="Eliminar" tooltipPosition="right" pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-text" (click)="onDelete(user)"></button>
+                </td>
+                <td>{{user.userName}}</td>
+                <td>{{user.fullName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.active ? "Si" : "No"}}</td>
+                <td>{{user.rol}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

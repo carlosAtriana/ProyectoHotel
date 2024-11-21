@@ -17,5 +17,5 @@ public class User {
     private String fullName;
     private String email;
     private Boolean active;
-    private String[] roles;
+    private String rol;
 }
