@@ -1,24 +1,83 @@
 <p-accordion>
-    <p-accordionTab header="{{inputHeader}}" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
-       <form #form="ngForm">
-          <div class="grid">
-             <div class="col-12 md:col-6">
-                <label for="nombreId">Nombre activo<span class="text-danger">*</span></label>
-                <input id="nombreId" pInputText type="text" name="nombre" class="w-full" placeholder="Nombre Activo"
-                   maxlength="100" required>
-             </div>
-          </div>
-          <div class="col-12 formgroup-inline">
-             <div class="field">
-                <button type="button" pButton label="Cancelar" class="p-button-outlined" (click)="onCancelar()"></button>
-             </div>
-             <div class="field">
-                <button type="button" pButton label="Guardar"  class="colorButton"
-                   (click)="onAceptar()"></button>
-             </div>
-          </div>
-       </form>
-    </p-accordionTab>
- </p-accordion>
- 
- 
+   <p-accordionTab header="{{inputHeader}}" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
+      <form #form="ngForm">
+         <div class="grid">
+            <div class="col-12 md:col-6">
+               <label for="name">Numero o nombre de la habitación<span class="text-danger">*</span></label>
+               <input #nameRef="ngModel" name="nombre" type="text" [(ngModel)]="dataTransferForm.data.number_name"
+                  pInputText [ngClass]="{'ng-invalid ng-dirty': nameRef.invalid && nameRef.touched}" required
+                  placeholder="Nombre de la habitación" class="w-full" />
+               @if (nameRef.invalid && nameRef.touched) {
+               <small class="warning-message-small">Se debe ingresar un nombre a la Habitación</small>
+               }
+            </div>
+            <div class="col-12 md:col-6">
+               <label for="room">Piso</label>
+               <p-dropdown #floorRef="ngModel" inputId="floor" [options]="listFloor" name="floor"
+                  optionLabel="number" placeholder="Seleccione un valor" [virtualScroll]="true" styleClass="w-full"
+                  [virtualScrollItemSize]="38" appendTo="body" [(ngModel)]="floorSelected" [required]="true"
+                  [ngClass]="{'ng-invalid ng-dirty': floorRef.invalid && floorRef.touched}">
+               </p-dropdown>
+               @if ( floorRef.invalid && floorRef.touched) {
+               <small class="warning-message-small">Se debe seleccionar un valor</small>
+               }
+            </div>
+            <div class="col-12 md:col-6">
+               <label for="room">Tipo de Habitación</label>
+               <p-dropdown #typeRef="ngModel" inputId="type" [options]="listTypeRoom" name="type"
+                  optionLabel="name" placeholder="Seleccione un tipo de Habitación" [virtualScroll]="true" styleClass="w-full"
+                  [virtualScrollItemSize]="38" appendTo="body" [(ngModel)]="typeRoomSelected" [required]="true"
+                  [ngClass]="{'ng-invalid ng-dirty': typeRef.invalid && typeRef.touched}">
+               </p-dropdown>
+               @if ( typeRef.invalid && typeRef.touched) {
+               <small class="warning-message-small">Se debe seleccionar un tipo de habitación</small>
+               }
+            </div>
+            <div class="col-12 md:col-6">
+               <label for="room">Estado de la Habitación</label>
+               <p-dropdown #statusRef="ngModel" inputId="status" [options]="liststatus" name="status"
+                  optionLabel="name" placeholder="Seleccione un Estado de Habitación" [virtualScroll]="true" styleClass="w-full"
+                  [virtualScrollItemSize]="38" appendTo="body" [(ngModel)]="statusSelected" [required]="true"
+                  [ngClass]="{'ng-invalid ng-dirty': statusRef.invalid && statusRef.touched}">
+               </p-dropdown>
+               @if ( statusRef.invalid && typeRef.touched) {
+               <small class="warning-message-small">Se debe seleccionar un estado de habitación</small>
+               }
+            </div>
+            <div class="col-12 md:col-6">
+               <label for="desccription">Descripción<span class="text-danger">*</span></label>
+               <input #typeRef="ngModel" id="desccription" name="desccription" type="text"
+                  [(ngModel)]="dataTransferForm.data.description" pInputText placeholder="Descripción" class="w-full" />
+            </div>
+            <div class="col-12 md:col-6">
+               <label for="priceByNight">Precio por noche<span class="text-danger">*</span></label>
+               <input #priceByNightRef="ngModel" id="priceByNight" name="priceByNight" type="number"
+                  [(ngModel)]="dataTransferForm.data.priceByNight" pInputText [ngClass]="{'ng-invalid ng-dirty': priceByNightRef.invalid 
+             && priceByNightRef.touched}" required placeholder="Precio por noche" class="w-full" />
+               @if ( priceByNightRef.invalid && priceByNightRef.touched) {
+               <small class="warning-message-small">Se debe ingresar un valor</small>
+               }
+            </div>
+            <div class="col-12 md:col-6">
+               <label for="beds">Cantidad de camas<span class="text-danger">*</span></label>
+               <input #bedsRef="ngModel" id="beds" name="beds" type="number" [(ngModel)]="dataTransferForm.data.beds"
+                  pInputText [ngClass]="{'ng-invalid ng-dirty': bedsRef.invalid 
+             && bedsRef.touched}" required placeholder="Cant. camas" class="w-full" />
+               @if ( bedsRef.invalid && bedsRef.touched) {
+               <small class="warning-message-small">Se debe ingresar un valor</small>
+               }
+            </div>
+            <div class="col-12 formgroup-inline">
+               <div class="field">
+                  <button label="Cancelar" pButton type="button" (click)="onCancelar()"
+                     class="p-button-outlined "></button>
+               </div>
+               <div class="field">
+                  <button class="colorButton" [label]="buttonLabel" pButton type="button" [disabled]="form.invalid"
+                     (click)="onAceptar()"></button>
+               </div>
+            </div>
+         </div>
+      </form>
+   </p-accordionTab>
+</p-accordion>

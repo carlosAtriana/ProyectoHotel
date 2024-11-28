@@ -9,6 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/rooms")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+
 public class RoomController {
 	private final RoomService roomService;
 
@@ -36,16 +37,17 @@ public class RoomController {
     public void updateRoom(@RequestBody Room room, @PathVariable String id){
     	Room findRoom = roomService.getRoomById(id);
     	Room roomAux;
-        if(findRoom.getId() == id){
-            room.setName(findRoom.getName());
+        if(findRoom.getId().equals(id)){
+            findRoom.setId(room.getId());
             roomAux = roomService.saveRoom(room);
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteRoom(@PathVariable String id){
         roomService.deleteRoom(id);
     }
+
     @GetMapping("/count/occupied")
     public long contarHabitacionesOcupadas() {
         return roomService.countOccupiedRooms();

@@ -35,10 +35,9 @@ public class SaleController {
     @PutMapping("/{id}")
     public void updateSale(@RequestBody Sale sale, @PathVariable String id){
     	Sale findSale = saleService.getSale(id);
-    	Sale saleAux;
-        if(findSale.getId() == id){
-        	sale.setName(findSale.getName());
-        	saleAux = saleService.createSale(sale);
+        if(findSale.getId().equals(id)){
+        	sale.setCostumer(findSale.getCostumer());
+        	saleService.createSale(sale);
         }
     }
 

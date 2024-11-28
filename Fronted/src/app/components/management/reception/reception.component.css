@@ -1,9 +1,10 @@
-.room-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+.container{
+  display: flex;
   gap: 15px;
   padding: 20px;
+  flex-wrap: wrap;
 }
+
 
 .room-card {
   position: relative;
@@ -30,6 +31,14 @@
 
 .room-card.occupied {
   background-color: #dc3545; /* Rojo */
+  color: white;
+}
+.room-card.reserved {
+  background-color: #a15a09; 
+  color: white;
+}
+.room-card.maintenance {
+  background-color: #094ba1; 
   color: white;
 }
 
@@ -73,3 +82,5 @@
   font-weight: bold;
   margin-top: auto;
 }
+
+

@@ -6,10 +6,11 @@
 <hr class="border border-top">
  
 @if (dataTransferForm && dataTransferForm.mode != mode.none) {
-    <app-room-input-fields [dataTransferForm]="dataTransferForm" (cancelar)="onCancel()"/>
+    <app-room-input-fields [dataTransferForm]="dataTransferForm" (add)="createRoom($event)" 
+    (update)="update($event)" (cancelar)="noneMode()"/>
 }
 @if (dataTransferForm && dataTransferForm.mode == mode.none) {
-    <app-dynamic-table [titleColumn]="title" [data]="data"/>
+    <app-room-list  [listRooms]="listRooms" (update)="onUpdate($event)" (delete)="onDelete($event)"/>
 }
 
 

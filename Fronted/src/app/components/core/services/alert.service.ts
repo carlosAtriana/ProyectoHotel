@@ -15,6 +15,10 @@ export class AlertService {
       showCancelButton: true,
       confirmButtonText: confirmText,
       cancelButtonText: cancelText,
+      customClass: {
+        container: 'my-swal-container',
+      },
+      allowOutsideClick: false
     });
   }
 

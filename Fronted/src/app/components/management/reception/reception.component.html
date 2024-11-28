@@ -1,24 +1,81 @@
-<div class="room-container">
-    <div class="room-card available">
-      <div class="room-content">
-        <div class="room-info">
-          <h4>203</h4>
-          <p>Sencilla</p>
+<p-tabView>
+  <p-tabPanel header="Todas">
+    <div class="container">
+      @for (room of listRooms; track $index) {
+      <div class="room-card"
+        [ngClass]="{'available': room.status === 'Disponible', 'occupied': room.status === 'Ocupado', 'reserved': room.status === 'Reservado', 'maintenance': room.status === 'Mantenimiento'}">
+        <div class="room-content">
+          <div class="room-info">
+            <h4>{{room.number_name}}</h4>
+            <p>{{room.type}}</p>
+          </div>
+          <img src="assets/imgPrueba.png" class="room-image" alt="Icono">
         </div>
-        <img src="assets/imgPrueba.png" class="room-image" alt="Icono">
+        <p class="room-status">{{room.status}}</p>
+        <button type="button" pButton class="btn btn-primary" (click)="bookRoom(room)">Reservar</button>
       </div>
-      <p class="room-status">Disponible</p>
+      }
     </div>
-  
-    <div class="room-card occupied">
-      <div class="room-content">
-        <div class="room-info">
-          <h4>215</h4>
-          <p>Sencilla</p>
+  </p-tabPanel>
+  <p-tabPanel header="Piso 1">
+    <div class="container">
+      @for (room of listRooms; track $index) {
+      @if (room.floor === 1) {
+      <div class="room-card"
+        [ngClass]="{'available': room.status === 'Disponible', 'occupied': room.status === 'Ocupado', 'reserved': room.status === 'Reservado', 'maintenance': room.status === 'Mantenimiento'}">
+        <div class="room-content">
+          <div class="room-info">
+            <h4>{{room.number_name}}</h4>
+            <p>{{room.type}}</p>
+          </div>
+          <img src="assets/imgPrueba.png" class="room-image" alt="Icono">
         </div>
-        <img src="assets/imgPrueba.png" class="room-image" alt="Icono">
+        <p class="room-status">{{room.status}}</p>
+        <button type="button" pButton class="btn btn-primary" (click)="bookRoom(room)">Reservar</button>
       </div>
-      <p class="room-status">Ocupada</p>
+      }
+      }
     </div>
-  </div>
-  
+  </p-tabPanel>
+  <p-tabPanel header="Piso 2">
+    <div class="container">
+      @for (room of listRooms; track $index) {
+      @if (room.floor === 2) {
+      <div class="room-card"
+        [ngClass]="{'available': room.status === 'Disponible', 'occupied': room.status === 'Ocupado', 'reserved': room.status === 'Reservado', 'maintenance': room.status === 'Mantenimiento'}">
+        <div class="room-content">
+          <div class="room-info">
+            <h4>{{room.number_name}}</h4>
+            <p>{{room.type}}</p>
+          </div>
+          <img src="assets/imgPrueba.png" class="room-image" alt="Icono">
+        </div>
+        <p class="room-status">{{room.status}}</p>
+        <button type="button" pButton class="btn btn-primary" (click)="bookRoom(room)">Reservar</button>
+      </div>
+      }
+      }
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Piso 3">
+    <div class="container">
+      @for (room of listRooms; track $index) {
+      @if (room.floor === 3) {
+      <div class="room-card"
+        [ngClass]="{'available': room.status === 'Disponible', 'occupied': room.status === 'Ocupado', 'reserved': room.status === 'Reservado', 'maintenance': room.status === 'Mantenimiento'}">
+        <div class="room-content">
+          <div class="room-info">
+            <h4>{{room.number_name}}</h4>
+            <p>{{room.type}}</p>
+          </div>
+          <img src="assets/imgPrueba.png" class="room-image" alt="Icono">
+        </div>
+        <p class="room-status">{{room.status}}</p>
+        <button type="button" pButton class="btn btn-primary" (click)="bookRoom(room)">Reservar</button>
+      </div>
+      }
+      }
+    </div>
+  </p-tabPanel>
+</p-tabView>
+

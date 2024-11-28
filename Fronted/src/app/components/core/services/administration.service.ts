@@ -35,7 +35,6 @@ export class AdministrationService {
     return this.http.post<IUser>(this.apiUrl + '/usuarios', user);
   }
   updateUser(user: IUser): Observable<IUser> {
-    console.log("el user desde el servicio es: ", user);
     return this.http.put<IUser>(this.apiUrl + '/usuarios/' + user.id, user);
   }
   deleteUser(id: string): Observable<IUser> {
@@ -43,16 +42,17 @@ export class AdministrationService {
   }
 
   getAllRooms(): Observable<IRoom[]> {
-    return this.http.get<IRoom[]>(this.apiUrl + '/roms');
+    return this.http.get<IRoom[]>(this.apiUrl + '/rooms');
   }
   createRoom(room: IRoom): Observable<IRoom> {
-    return this.http.post<IRoom>(this.apiUrl + '/roms', room);
+    console.log("el room desde el servicio es: ", room)
+    return this.http.post<IRoom>(this.apiUrl + '/rooms', room);
   }
   updateRoom(room: IRoom): Observable<IRoom> {
-    return this.http.put<IRoom>(this.apiUrl + '/roms/' + room.id, room);
+    return this.http.put<IRoom>(this.apiUrl + '/rooms/' + room.id, room);
   }
   deleteRoom(id: string): Observable<IRoom> {
-    return this.http.delete<IRoom>(this.apiUrl + '/roms/' + id);
+    return this.http.delete<IRoom>(this.apiUrl + '/rooms/' + id);
   }
 
 

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { IReservation } from '../models/reservation';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { IRoom } from '../models/room';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +30,10 @@ export class ManagementService {
   deleteReservation(id: string): Observable<any> {
     return this.http.delete(this.apiURL + '/reservations/' + id)
   }
+
+  getAllRooms(): Observable<any> {
+    // return this.http.get(this.apiURL + '/reservations/allowed-rooms/' + reservation.checkInDate + '/' + reservation.checkOutDate)
+    return this.http.get(this.apiURL + '/rooms')
+  }
+
 }

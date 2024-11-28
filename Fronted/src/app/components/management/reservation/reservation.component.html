@@ -7,7 +7,7 @@
 </div>
 <p-dialog header="{{headerDialog}}" appendTo="body" [modal]="true" [draggable]="false" [(visible)]="modalVisible"
     [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '50vw' }" [resizable]="false">
-    <form #ngForm="ngForm">
+    <form #form="ngForm">
         <div class="grid">
             <div class="col-12 md:col-6">
                 <label for="username">Fecha de entrada</label>
@@ -17,25 +17,37 @@
                     [ngClass]="{'ng-invalid ng-dirty': fechaHastaRef.invalid && fechaHastaRef.touched}"
                     [showIcon]="true" dateFormat="yy/mm/dd" [readonlyInput]="true" [required]="true">
                 </p-calendar>
+                @if ( fechaHastaRef.invalid && fechaHastaRef.touched) {
+                <small class="warning-message-small">Se debe seleccionar un valor</small>
+                }
             </div>
             <div class="col-12 md:col-6">
                 <label for="username">Fecha de salida</label>
-                <p-calendar #fechaSalidaRef="ngModel" showButtonBar="true" inputId="fechaSalidaId" [showTime]="false"
-                    [showSeconds]="true" name="fechaSalida" placeholder="Seleccione ..."
-                    [(ngModel)]="dataTranferForm.data.checkOutDate" appendTo="body" styleClass="w-full"
-                    [ngClass]="{'ng-invalid ng-dirty': fechaSalidaRef.invalid && fechaSalidaRef.touched}"
-                    [showIcon]="true" dateFormat="yy/mm/dd" [readonlyInput]="false" [required]="true">
+                <p-calendar showButtonBar="true" inputId="fechaSalidaId" [showTime]="false" [showSeconds]="true"
+                    name="fechaSalida" placeholder="Seleccione ..." [(ngModel)]="dataTranferForm.data.checkOutDate"
+                    appendTo="body" styleClass="w-full" [showIcon]="true" dateFormat="yy/mm/dd" [readonlyInput]="false">
                 </p-calendar>
             </div>
             <div class="col-12 md:col-6">
                 <label for="username">Cant. Huéspedes</label>
-                <input type="number" name="cantidadHuespedes" pInputText id="username" class="w-full"
-                    [(ngModel)]="dataTranferForm.data.numberGuests" />
+                <input #cantRef="ngModel" type="number" name="cantidadHuespedes" pInputText id="username" class="w-full"
+                    [(ngModel)]="dataTranferForm.data.numberGuests" required
+                    [ngClass]="{'ng-invalid ng-dirty': cantRef.invalid && cantRef.touched}" />
+                @if ( cantRef.invalid && cantRef.touched) {
+                <small class="warning-message-small">Se debe seleccionar un valor</small>
+                }
             </div>
             <div class="col-12 md:col-6">
-                <label for="username">Tipo de habitación</label>
-                <input type="text" name="tipoHabitaciones" pInputText id="username" class="w-full"
-                    [(ngModel)]="dataTranferForm.data.roomType" />
+                <label for="room">Habitación</label>
+                <p-dropdown #roomRef="ngModel" inputId="customerId" [options]="listRooms" name="roomId"
+                    optionLabel="name" placeholder="Seleccione una Habitación" [virtualScroll]="true" filter="true"
+                    styleClass="w-full" [virtualScrollItemSize]="38" appendTo="body" [ngModel]="selectedCustomer"
+                    (onChange)="onCustomerChange($event)" [required]="true"
+                    [ngClass]="{'ng-invalid ng-dirty': roomRef.invalid && roomRef.touched}">
+                </p-dropdown>
+                @if ( roomRef.invalid && roomRef.touched) {
+                <small class="warning-message-small">Se debe seleccionar un valor</small>
+                }
             </div>
             <div class="col-12 md:col-6">
                 <label for="username">Descripción</label>
@@ -44,42 +56,30 @@
             </div>
             <div class="col-12 md:col-6">
                 <label for="customerId">Cliente</label>
-                <!-- <input type="text" pInputText id="customerId"name="customerId" class="w-full"
-                    [(ngModel)]="dataTranferForm.data.customerId" /> -->
-                    <!-- [options]="items"
-                    [(ngModel)]="selectedItem" -->
-                    <p-dropdown 
-                    placeholder="Select Item"
-                    [virtualScroll]="true" styleClass="w-full"
-                    [virtualScrollItemSize]="38" appendTo="body"/>
+                <p-dropdown #customerRef="ngModel" inputId="customerId" [options]="listCustomers" name="customerId"
+                    optionLabel="name" placeholder="Seleccione un cliente" [virtualScroll]="true" filter="true"
+                    styleClass="w-full" [virtualScrollItemSize]="38" appendTo="body" [ngModel]="selectedCustomer"
+                    (onChange)="onCustomerChange($event)" [required]="true"
+                    [ngClass]="{'ng-invalid ng-dirty': customerRef.invalid && customerRef.touched}">
+                </p-dropdown>
+                @if ( customerRef.invalid && customerRef.touched) {
+                <small class="warning-message-small">Se debe seleccionar un valor</small>
+                }
             </div>
 
             <div class="col-12 ">
                 <p-button [severity]="dataTranferForm.mode === 'edit' ? 'warning' : null" label="{{textButtonDialog}}"
-                    (onClick)="onCreateUpdateReservation()" />
+                    (onClick)="onCreateUpdateReservation()" [disabled]="form.invalid" />
                 @if (dataTranferForm.mode == 'edit' ) {
-                <p-button label="Eliminar" class="ml-2" severity="danger" (onClick)="delelteReservation(dataTranferForm.data)" />
+                <p-button label="Eliminar" class="ml-2" severity="danger"
+                    (onClick)="confirmDeleteReservation(dataTranferForm.data)" />
                 }
             </div>
 
         </div>
     </form>
 </p-dialog>
-
-<div id="eventInfo" class="event-info" *ngIf="eventInfo">
-    <table>
-      <tr>
-        <td class="colorDiv">Cliente:</td>
-        <td>{{eventTitle}}</td>
-      </tr>
-      <tr>
-        <td class="colorDiv">Fecha reserva [día/mes/año]:</td>
-        <td>{{eventStart | date:'dd/MM/yyyy'}}</td>
-      </tr>
-      <tr>
-        <td class="colorDiv">Tipo:</td>
-        <td>{{eventInfo.roomType}}</td>
-      </tr>
-    
-    </table>
-  </div>
+<div id="eventInfo" style="display: none; position: absolute; background-color: rgba(0, 0, 0, 0.788);
+color: white; font-size: 0.8rem; border: 1px solid #ccc; z-index: 1000;">
+    <!-- Aquí se mostrará la información del evento -->
+</div>

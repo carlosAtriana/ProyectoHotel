@@ -18,7 +18,7 @@
                 <button type="button" pButton label="Cancelar" class="p-button-outlined" (click)="onCancelar()"></button>
              </div>
              <div class="field">
-                <button type="button" pButton label="{{buttonLabel}}"  class="colorButton"
+                <button type="button" pButton label="{{buttonLabel}}" [disabled]="form.invalid" class="colorButton"
                    (click)="onAceptar()"></button>
              </div>
           </div>

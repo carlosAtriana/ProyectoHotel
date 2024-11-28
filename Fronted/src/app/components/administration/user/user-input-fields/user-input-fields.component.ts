@@ -98,27 +98,6 @@ export class UserInputFieldsComponent {
   onCancelar(): void {
     this.cancelar.emit();
   }
-  onGetRolesDropdowns() {
-    this.administrationService.getAllRoles().subscribe({
-      next: (res) => {
-        if (res.isSuccessful) {
-          this.rolesOptions = res.data;
-        } else {
-          this.alertService.error(
-            environment.title,
-            'Se produjo un error al obtener los roles'
-          );
-        }
-      },
-      error: (err) => {
-        this.alertService.error(
-          environment.title,
-          'Se produjo un error al obtener los roles'
-        );
-      },
-    });
-  }
-
 
 
 

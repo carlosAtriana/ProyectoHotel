@@ -258,3 +258,7 @@ a {
   display: flex;
 }
 
+
+.my-swal-container{
+  z-index: 9999;
+}
