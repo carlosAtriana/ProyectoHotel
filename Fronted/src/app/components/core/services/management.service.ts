@@ -48,6 +48,10 @@ export class ManagementService {
     return this.http.put<IReception>(this.apiURL + '/reception/' + reception?.id, reception)
   }
 
+  verifyReception(reception: IReception): Observable<IReception> {
+    return this.http.delete<IReception>(this.apiURL + '/reception/' + reception.id)
+  }
+
 
 
 }

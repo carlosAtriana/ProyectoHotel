@@ -25,13 +25,13 @@ public class ReceptionService {
     }
 
     public Reception createReception(Reception reception) {
-        Room room = updateRoomStatus(reception.getRoomId());
+        Room room = updateRoomStatus(reception.getRoom().getId());
         reception.setMontoTotal(null); // Monto total se calcula al retirar
         return receptionRepository.save(reception);
     }
 
     public void retirarReception(Reception reception) {
-        Room room = updateRoomStatus(reception.getRoomId());
+        Room room = updateRoomStatus(reception.getRoom().getId());
         Double monto = calculateTotal(reception);
         if (reception.getMontoTotal() == null) {
             reception.setMontoTotal(monto);
@@ -55,7 +55,7 @@ public class ReceptionService {
             throw new IllegalArgumentException("La fecha de check-out no puede ser anterior al check-in");
         }
 
-        Room room = roomService.getRoomById(reception.getRoomId());
+        Room room = roomService.getRoomById(reception.getRoom().getId());
 
         long diffInMillies = reception.getCheckOutDate().getTime() - reception.getCheckInDate().getTime();
         long totalHours = diffInMillies / (1000 * 60 * 60);

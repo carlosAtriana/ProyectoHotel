@@ -13,8 +13,8 @@ import java.util.Date;
 public class Reception {
     @Id
     private String id;
-    private Room roomId;
-    private String customerId;
+    private Room room;
+    private Customer customer;
     private Date checkInDate;
     private Date checkOutDate;
     private Double montoTotal;

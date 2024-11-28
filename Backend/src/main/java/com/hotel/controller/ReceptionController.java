@@ -37,11 +37,11 @@ public class ReceptionController {
 
         if(receptionSearched != null && receptionSearched.getId().equals(id)){
 
-            if(reception.getRoomId() != null){
-                receptionSearched.setRoomId(reception.getRoomId());
+            if(reception.getRoom().getId() != null){
+                receptionSearched.setRoom(reception.getRoom());
             }
-            if(reception.getCustomerId() != null){
-                receptionSearched.setCustomerId(reception.getCustomerId());
+            if(reception.getCustomer() != null){
+                receptionSearched.setCustomer(reception.getCustomer());
             }
             if ( reception.getCheckInDate() != null) {
                 receptionSearched.setCheckInDate((reception.getCheckInDate()));

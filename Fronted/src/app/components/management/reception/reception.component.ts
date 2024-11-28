@@ -89,7 +89,7 @@ export class ReceptionComponent {
   }
 
   onRetirar(room: IRoom){
-    const removeReception = this.listReception.find(r => r.roomId === room.id);
+    const removeReception = this.listReception.find(r => r.room.id === room.id);
     const dataCurrent = new Date()
     removeReception!.checkOutDate = dataCurrent;
     this.alertService.question(environment.title, '¿Está seguro que desea retirar la habitación?', 'Sí', 'No')

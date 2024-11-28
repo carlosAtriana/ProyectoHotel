@@ -62,8 +62,8 @@ export class ReceptionInputFieldsComponent {
   
   onAceptar() {
     const dataCurrent = new Date()
-    this.reception.roomId = this.room.id;
-    this.reception.customerId = this.customer.id;
+    this.reception.room = this.room;
+    this.reception.customer = this.customer;
     this.reception.checkInDate = dataCurrent;
     this.managementService.createReception(this.reception).subscribe({
       next: () => {

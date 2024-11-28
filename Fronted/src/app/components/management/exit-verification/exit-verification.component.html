@@ -1,5 +1,3 @@
-
-
 <h4 class="pb-2">Verficacion de salida</h4>
 
 <div class="card">
@@ -11,7 +9,7 @@
             <div style="text-align:right; max-width: 100%; width: 100%;">
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
-                  
+
                 </span>
             </div>
         </ng-template>
@@ -20,7 +18,7 @@
                 <th>Opciones</th>
                 <th>Nombre del cliente
                     <p-columnFilter type="text" field="number_name" display="menu"></p-columnFilter>
-                </th>      
+                </th>
                 <th>Fecha de entrada
                     <p-columnFilter type="text" field="checkInDate" display="menu"></p-columnFilter>
                 </th>
@@ -30,17 +28,22 @@
                 <th>Monto total
                     <p-columnFilter type="text" field="priceByNight" display="menu"></p-columnFilter>
                 </th>
-               
+
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-room>
-            <tr>
-                <td></td>
-                <td>{{room.nombre}}</td>
-                <td>{{room.checkInDate}}</td>
-                <td>{{room.checkOutDate}}</td>
-                <td>{{room.montoTotal}}</td>
-            </tr>
+        <ng-template pTemplate="body" let-reception>
+            @if (reception.checkOutDate) {
+                <tr>
+                    <td class="btn-table-action">
+                        <button pTooltip="Verficacion de salida" tooltipPosition="right" pButton pRipple type="button" icon="bx bx-check-circle nav__icon"
+                        class="p-button-rounded p-button-text" (click)="onVerify(reception)"></button>
+                    </td>
+                    <td>{{reception.customer.name}}</td>
+                    <td>{{ reception.checkInDate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{reception.checkOutDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>{{reception.montoTotal}}</td>
+                </tr>
+            }
         </ng-template>
     </p-table>
 </div>
