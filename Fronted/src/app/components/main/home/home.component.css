@@ -1,0 +1,33 @@
+.background-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  animation: rotateBackground 30s infinite;
+}
+h1{
+  color: black;
+  font-size: 50px;
+}
+.widget {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 9999;
+}
+
+@keyframes rotateBackground {
+  0% {
+    background-image: url('/assets/logoHotel.webp');
+  }
+  33% {
+    background-image: url('/assets/portada1.webp');
+  }
+  66% {
+    background-image: url('/assets/portada2.jpg');
+  }
+  100% {
+    background-image: url('/assets/portada3.webp');
+  }
+}
