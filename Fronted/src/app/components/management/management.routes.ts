@@ -23,6 +23,12 @@ export const routesManagement: Routes = [
         loadComponent: () =>
           import('./point-of-sale/point-of-sale.component').then((m) => m.PointOfSaleComponent),
         title: 'Punto de Venta',
+      }, 
+      {
+        path: 'exit-verification',
+        loadComponent: () =>
+          import('./exit-verification/exit-verification.component').then((m) => m.ExitVerificationComponent),
+        title: 'Verificación de Salida',
       }
     ],
   },

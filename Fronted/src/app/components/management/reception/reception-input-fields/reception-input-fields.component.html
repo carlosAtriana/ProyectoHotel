@@ -1,4 +1,6 @@
 <div class="container">
+
+
    <div class="card">
       <div class="card-header">
          Información de la habitación
@@ -71,33 +73,19 @@
                      maxlength="100" required [(ngModel)]="customer.email">
                </div>
             </div>
-
          </form>
-
       </div>
    </div>
    <div class="card">
-      <div class="card-header">
-         Reserva
-      </div>
-      <div class="card-body">
-         <form #form="ngForm">
-            <div class="col-12 md:col-12">
-               <label for="username">Fecha de salida</label>
-               <p-calendar showButtonBar="true" inputId="fechaSalidaId" [showTime]="false" [showSeconds]="true"
-                   name="fechaSalida" placeholder="Seleccione ..." [(ngmodel)] = "reservation.checkIn"
-                   appendTo="body" styleClass="w-full" [showIcon]="true" dateFormat="yy/mm/dd" [readonlyInput]="false">
-               </p-calendar>
-            </div>
-
-         </form>
-
+      <div class="col-12 formgroup-inline">
+         <div class="field">
+            <button label="Cancelar" pButton type="button" (click)="onCancelar()" class="p-button-outlined "></button>
+         </div>
+         <div class="field">
+            <button class="colorButton" label="Reservar" pButton type="button" [disabled]="form.invalid"
+               (click)="onAceptar()"></button>
+          
+         </div>
       </div>
    </div>
 </div>
-<!-- <p-accordion styleClass="uno">
-   <p-accordionTab header="Informacion de la habitacion" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
-
-
-   </p-accordionTab>
-</p-accordion> -->

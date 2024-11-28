@@ -4,6 +4,7 @@ import { IReservation } from '../models/reservation';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { IRoom } from '../models/room';
+import { IReception } from '../models/reception';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class ManagementService {
   }
 
   createReservation(reservation: IReservation): Observable<IReservation> {
-    console.log("creando reserva", reservation);
     return this.http.post<IReservation>(this.apiURL + '/reservations', reservation)
   }
 
@@ -35,5 +35,19 @@ export class ManagementService {
     // return this.http.get(this.apiURL + '/reservations/allowed-rooms/' + reservation.checkInDate + '/' + reservation.checkOutDate)
     return this.http.get(this.apiURL + '/rooms')
   }
+
+  getAllReception(): Observable<IReception[]> {
+    return this.http.get<IReception[]>(this.apiURL + '/reception')
+  }
+
+  createReception(reception: IReception): Observable<IReception> {
+    return this.http.post<IReception>(this.apiURL + '/reception', reception)
+  }
+
+  retirarReception(reception: IReception | undefined): Observable<IReception> {
+    return this.http.put<IReception>(this.apiURL + '/reception/' + reception?.id, reception)
+  }
+
+
 
 }

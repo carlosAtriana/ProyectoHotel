@@ -45,7 +45,6 @@ export class AdministrationService {
     return this.http.get<IRoom[]>(this.apiUrl + '/rooms');
   }
   createRoom(room: IRoom): Observable<IRoom> {
-    console.log("el room desde el servicio es: ", room)
     return this.http.post<IRoom>(this.apiUrl + '/rooms', room);
   }
   updateRoom(room: IRoom): Observable<IRoom> {

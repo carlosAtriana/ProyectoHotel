@@ -1,8 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { RoomListComponent } from '../../../administration/room/room-list/room-list.component';
-import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
-import { RoomInputFieldsComponent } from '../../../administration/room/room-input-fields/room-input-fields.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { AccordionModule } from 'primeng/accordion';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -16,6 +13,8 @@ import { AdministrationService } from '../../../core/services/administration.ser
 import { environment } from '../../../../../environments/environment';
 import { ICustomer } from '../../../core/models/customer';
 import { AlertService } from '../../../core/services/alert.service';
+import { ManagementService } from '../../../core/services/management.service';
+import { IReception } from '../../../core/models/reception';
 
 @Component({
   selector: 'app-reception-input-fields',
@@ -38,10 +37,12 @@ export class ReceptionInputFieldsComponent {
   listCustomers: ICustomer[] = [];
   selectedCustomer: ICustomer = {} as ICustomer;
   customer: ICustomer = {} as ICustomer;
-
+  reception: IReception = {} as IReception;
 
   administrationService = inject(AdministrationService);
+  managementService = inject(ManagementService);
   alertService = inject(AlertService);
+
 
   ngOnInit(): void {
     this.getCustomers();
@@ -58,6 +59,23 @@ export class ReceptionInputFieldsComponent {
       complete: () => { }
     });
   }
+  
+  onAceptar() {
+    const dataCurrent = new Date()
+    this.reception.roomId = this.room.id;
+    this.reception.customerId = this.customer.id;
+    this.reception.checkInDate = dataCurrent;
+    this.managementService.createReception(this.reception).subscribe({
+      next: () => {
+        this.alertService.success(environment.title, `Recepción creada correctamente`);
+      },error: (error) => {
+        this.alertService.error(environment.title, `error al crear recepción: ${error.error}`);
+      },
+      complete: () => {
+        this.onCancelar();
+       }
+    })
+  }
 
   onCustomerChange(customer: any){
     this.customer = customer.value;
@@ -66,10 +84,6 @@ export class ReceptionInputFieldsComponent {
 
   onCancelar() {
     this.cancelar.emit();
-  }
-  
-  onAceptar() {
-  
   }
 
 

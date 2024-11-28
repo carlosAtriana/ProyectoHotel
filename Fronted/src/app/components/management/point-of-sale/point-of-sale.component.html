@@ -1,1 +1,59 @@
-<p>point-of-sale works!</p>
+
+
+
+<h4 class="pb-2">Punto de venta</h4>
+
+
+<div class="card">
+    <p-table [value]="listReception" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
+        [responsiveLayout]="'scroll'" [autoLayout]="true" [showCurrentPageReport]="true"
+        [globalFilterFields]="['number_name', 'floor', 'type', 'status', 'description', 'priceByNight', 'beds']"
+        currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
+        <ng-template pTemplate="caption">
+            <div style="text-align:right; max-width: 100%; width: 100%;">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                  
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Opciones</th>
+                <th>Numero o nombre
+                    <p-columnFilter type="text" field="number_name" display="menu"></p-columnFilter>
+                </th>
+                <th>Piso
+                    <p-columnFilter type="text" field="floor" display="menu"></p-columnFilter>
+                </th>
+                <th>Tipo de habitación
+                    <p-columnFilter type="text" field="type" display="menu"></p-columnFilter>
+                </th>
+                <th>Estado
+                    <p-columnFilter type="text" field="status" display="menu"></p-columnFilter>
+                </th>
+                <th>Descripción
+                    <p-columnFilter type="text" field="description" display="menu"></p-columnFilter>
+                </th>
+                <th>Precio por noche
+                    <p-columnFilter type="text" field="priceByNight" display="menu"></p-columnFilter>
+                </th>
+                <th>Cant. Camas
+                    <p-columnFilter type="text" field="beds" display="menu"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-room>
+            <tr>
+               
+                <td>{{room.number_name}}</td>
+                <td>{{room.floor}}</td>
+                <td>{{room.type}}</td>
+                <td>{{room.status}}</td>
+                <td>{{room.description}}</td>
+                <td>{{room.priceByNight}}</td>
+                <td>{{room.beds}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

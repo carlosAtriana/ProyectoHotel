@@ -221,7 +221,6 @@ export class ReservationComponent {
     this.administrationService.getAllCustomer().subscribe({
       next: (data) => {
         this.listCustomers = data;
-        console.log("esta es la lista de customer", this.listCustomers)
       },
       error: (error) => {
         this.alertService.error(environment.title, `error al obtener clientes: ${error.error.message}`);

@@ -54,7 +54,6 @@ export class UserInputFieldsComponent {
         this.labelButton = 'Aceptar';
         break;
       case Mode.edit:
-        console.log("hola", this.dataTransferForm.data.rol)
         this._initData = {...data};
         this.rolSelected.name = data.rol;
         this.inputHeader = 'Editar Usuario';

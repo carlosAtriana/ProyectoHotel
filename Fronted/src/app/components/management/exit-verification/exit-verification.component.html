@@ -1,0 +1,46 @@
+
+
+<h4 class="pb-2">Verficacion de salida</h4>
+
+<div class="card">
+    <p-table [value]="listReception" #dt [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 30]"
+        [responsiveLayout]="'scroll'" [autoLayout]="true" [showCurrentPageReport]="true"
+        [globalFilterFields]="['number_name', 'floor', 'type', 'status', 'description', 'priceByNight', 'beds']"
+        currentPageReportTemplate="Se muestran {first} a {last} de {totalRecords} resultados">
+        <ng-template pTemplate="caption">
+            <div style="text-align:right; max-width: 100%; width: 100%;">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                  
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Opciones</th>
+                <th>Nombre del cliente
+                    <p-columnFilter type="text" field="number_name" display="menu"></p-columnFilter>
+                </th>      
+                <th>Fecha de entrada
+                    <p-columnFilter type="text" field="checkInDate" display="menu"></p-columnFilter>
+                </th>
+                <th>Fecha de salida
+                    <p-columnFilter type="text" field="checkOutDate" display="menu"></p-columnFilter>
+                </th>
+                <th>Monto total
+                    <p-columnFilter type="text" field="priceByNight" display="menu"></p-columnFilter>
+                </th>
+               
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-room>
+            <tr>
+                <td></td>
+                <td>{{room.nombre}}</td>
+                <td>{{room.checkInDate}}</td>
+                <td>{{room.checkOutDate}}</td>
+                <td>{{room.montoTotal}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

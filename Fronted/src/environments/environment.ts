@@ -80,7 +80,7 @@ export const environment = {
                 {
                     label: 'Verficación de Salidas',
                     icon: 'pi pi-building',
-                    routerLink: '/home/information/actives',
+                    routerLink: '/home/information/exit-verification',
                     disabled: false,
                     id: 'cd4c0af6-ffca-422f-be74-6aed93fcafa7'
                 },

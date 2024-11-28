@@ -42,6 +42,8 @@ export class ReceptionComponent {
   managementService = inject(ManagementService);
   alertService = inject(AlertService);
 
+  listReception: IReception[] = [];
+
   ngOnInit() {
     this.tabs = [
       { title: 'Todo', content: 'Tab 1 Content' },
@@ -50,6 +52,7 @@ export class ReceptionComponent {
       { title: 'Piso 3', content: 'Tab 3 Content' }
     ];
     this.getAllRooms();
+    this.getAllReception();
   }
 
   getAllRooms() {
@@ -64,8 +67,44 @@ export class ReceptionComponent {
     })
   }
 
+  getAllReception(){
+    this.managementService.getAllReception().subscribe({
+      next: (res) => {
+        this.listReception = res;
+      }, error: (err) => {
+        this.alertService.error(environment.title, `Error al obtener las reservas: ${err.message}`)
+      }, complete: () => { }
+    })
+  }
+
   bookRoom(room: IRoom) {
     this.visibleBlock = true;
     this.room = room;
   }
+
+  cancel(){
+    this.visibleBlock = false;
+    this.getAllReception();
+    this.getAllRooms();
+  }
+
+  onRetirar(room: IRoom){
+    const removeReception = this.listReception.find(r => r.roomId === room.id);
+    const dataCurrent = new Date()
+    removeReception!.checkOutDate = dataCurrent;
+    this.alertService.question(environment.title, '¿Está seguro que desea retirar la habitación?', 'Sí', 'No')
+    .then((result) => {
+      if (result.isConfirmed) {
+        this.managementService.retirarReception(removeReception).subscribe({
+          next: () => {
+            this.alertService.success(environment.title, 'Hotel retirado correctamente');
+            this.getAllRooms();
+          }, error: (err) => {
+            this.alertService.error(environment.title, `Error al retirar el hotel: ${err.message}`)
+          }, complete: () => { }
+        })
+      }
+    });
+  }
+
 }
