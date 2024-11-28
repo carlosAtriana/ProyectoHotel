@@ -16,4 +16,5 @@ public class Sale {
 	private String description;
 	private int total;
 	private double iva;
+	private Date date;
 }

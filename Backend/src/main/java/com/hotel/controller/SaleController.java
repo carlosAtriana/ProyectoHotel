@@ -31,6 +31,11 @@ public class SaleController {
     public Sale getSale(@PathVariable String id){
         return saleService.getSale(id);
     }
+    //obtener ventas de un cliente
+    @GetMapping("/customer/{costumerId}")
+    public List<Sale> getSalesByCustomer(@PathVariable String costumerId){
+        return saleService.getSalesByCustomer(costumerId);
+    }
 
     @PutMapping("/{id}")
     public void updateSale(@RequestBody Sale sale, @PathVariable String id){
@@ -44,5 +49,20 @@ public class SaleController {
     @DeleteMapping
     public void deleteSale(@PathVariable String id){
     	saleService.deleteSale(id);
+    }
+    //obtener informes de ventas
+    @GetMapping("/month")
+    public List<Sale> getSalesByMonth(@RequestParam Date startOfMonth, @RequestParam Date endOfMonth){
+        return saleService.getSalesByMonth(startOfMonth, endOfMonth);
+    }
+
+    @GetMapping("/week")
+    public List<Sale> getSalesByWeek(@RequestParam Date startOfWeek, @RequestParam Date endOfWeek){
+        return saleService.getSalesByWeek(startOfWeek, endOfWeek);
+    }
+    //calcular cuenta
+    @GetMapping("/calculate/{saleId}")
+    public double calculateTotal(@PathVariable String saleId) {
+        return saleService.calculateTotal(saleId);
     }
 }
