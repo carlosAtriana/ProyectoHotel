@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { IdataTransferForm } from '../../core/models/data-transfer-form';
 import { ReceptionInputFieldsComponent } from "./reception-input-fields/reception-input-fields.component";
 import { Mode } from '../../core/enums/mode';
+import { IReception } from '../../core/models/reception';
 
 interface ITabView {
   title: string;
@@ -33,7 +34,8 @@ export class ReceptionComponent {
   listRooms: IRoom[] = [];
   modalVisible: boolean = false;
   headerDialog: string = '';
-  dataTranferForm: IdataTransferForm<any> = {} as any;
+  visibleBlock: boolean = false;
+  room: IRoom = {} as IRoom;
 
   mode: typeof Mode = Mode;
   
@@ -63,7 +65,7 @@ export class ReceptionComponent {
   }
 
   bookRoom(room: IRoom) {
-    this.modalVisible = true;
-
+    this.visibleBlock = true;
+    this.room = room;
   }
 }

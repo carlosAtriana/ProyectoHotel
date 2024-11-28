@@ -1,51 +1,103 @@
-<p-accordion>
-    <p-accordionTab header="{{inputHeader}}" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
-       <form #form="ngForm">
-          <div class="grid">
-             <div class="col-12 md:col-6">
-                <label for="name">Numero o nombre de la habitación<span class="text-danger">*</span></label>
-                <input #nameRef="ngModel" name="nombre" type="text" [(ngModel)]="dataTransferForm.data.number_name"
-                   pInputText [ngClass]="{'ng-invalid ng-dirty': nameRef.invalid && nameRef.touched}" required
-                   placeholder="Nombre de la habitación" class="w-full" />
-                @if (nameRef.invalid && nameRef.touched) {
-                <small class="warning-message-small">Se debe ingresar un nombre a la Habitación</small>
-                }
-             </div>
-   
-             <div class="col-12 md:col-6">
-                <label for="desccription">Descripción<span class="text-danger">*</span></label>
-                <input #typeRef="ngModel" id="desccription" name="desccription" type="text"
-                   [(ngModel)]="dataTransferForm.data.description" pInputText placeholder="Descripción" class="w-full" />
-             </div>
-             <div class="col-12 md:col-6">
-                <label for="priceByNight">Precio por noche<span class="text-danger">*</span></label>
-                <input #priceByNightRef="ngModel" id="priceByNight" name="priceByNight" type="number"
-                   [(ngModel)]="dataTransferForm.data.priceByNight" pInputText [ngClass]="{'ng-invalid ng-dirty': priceByNightRef.invalid 
-              && priceByNightRef.touched}" required placeholder="Precio por noche" class="w-full" />
-                @if ( priceByNightRef.invalid && priceByNightRef.touched) {
-                <small class="warning-message-small">Se debe ingresar un valor</small>
-                }
-             </div>
-             <div class="col-12 md:col-6">
-                <label for="beds">Cantidad de camas<span class="text-danger">*</span></label>
-                <input #bedsRef="ngModel" id="beds" name="beds" type="number" [(ngModel)]="dataTransferForm.data.beds"
-                   pInputText [ngClass]="{'ng-invalid ng-dirty': bedsRef.invalid 
-              && bedsRef.touched}" required placeholder="Cant. camas" class="w-full" />
-                @if ( bedsRef.invalid && bedsRef.touched) {
-                <small class="warning-message-small">Se debe ingresar un valor</small>
-                }
-             </div>
-             <div class="col-12 formgroup-inline">
-                <div class="field">
-                   <button label="Cancelar" pButton type="button" (click)="onCancelar()"
-                      class="p-button-outlined "></button>
-                </div>
-                <div class="field">
-                   <button class="colorButton" [label]="buttonLabel" pButton type="button" [disabled]="form.invalid"
-                      (click)="onAceptar()"></button>
-                </div>
-             </div>
-          </div>
-       </form>
-    </p-accordionTab>
- </p-accordion>
+<div class="container">
+   <div class="card">
+      <div class="card-header">
+         Información de la habitación
+      </div>
+      <div class="card-body">
+         <table class="table table-borderless">
+            <tbody>
+               <tr>
+                  <td><strong>Nombre/Numero</strong></td>
+                  <td>{{room.number_name}}</td>
+               </tr>
+               <tr>
+                  <td><strong>Piso</strong></td>
+                  <td>{{room.floor}}</td>
+               </tr>
+
+               <tr>
+                  <td><strong>Tipo</strong></td>
+                  <td> {{room.type}}</td>
+               </tr>
+               <tr>
+                  <td><strong>Estado</strong></td>
+                  <td>{{room.status}}</td>
+               </tr>
+               <tr>
+                  <td><strong>Descripción</strong></td>
+                  <td>{{room.description}}</td>
+               </tr>
+               <tr>
+                  <td><strong>Precio por noche</strong></td>
+                  <td>{{room.priceByNight}}</td>
+               </tr>
+               <tr>
+                  <td><strong>Cantidad de camas</strong></td>
+                  <td>{{room.beds}}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <div class="card">
+      <div class="card-header">
+         Información del cliente
+      </div>
+      <div class="card-body">
+         <div class="col-12 md:col-12">
+            <label for="customerId">Cliente</label>
+            <p-dropdown #customerRef="ngModel" inputId="customerId" [options]="listCustomers" name="customerId"
+               optionLabel="name" placeholder="Seleccione un cliente" [virtualScroll]="true" filter="true"
+               styleClass="w-full" [virtualScrollItemSize]="38" appendTo="body" [ngModel]="selectedCustomer"
+               (onChange)="onCustomerChange($event)" [required]="true"
+               [ngClass]="{'ng-invalid ng-dirty': customerRef.invalid && customerRef.touched}">
+            </p-dropdown>
+            @if ( customerRef.invalid && customerRef.touched) {
+            <small class="warning-message-small">Se debe seleccionar un valor</small>
+            }
+         </div>
+         <hr>
+         <p>O créelo si no está en la lista</p>
+         <form #form="ngForm">
+            <div class="grid">
+               <div class="col-12 md:col-12">
+                  <label for="nombreId">Nombre<span class="text-danger">*</span></label>
+                  <input id="nombreId" pInputText type="text" name="nombre" class="w-full" placeholder="Nombre cliente"
+                     maxlength="100" required [(ngModel)]="customer.name">
+               </div>
+               <div class="col-12 md:col-12">
+                  <label for="email">Email<span class="text-danger">*</span></label>
+                  <input id="email" pInputText type="text" name="email" class="w-full" placeholder="Correo"
+                     maxlength="100" required [(ngModel)]="customer.email">
+               </div>
+            </div>
+
+         </form>
+
+      </div>
+   </div>
+   <div class="card">
+      <div class="card-header">
+         Reserva
+      </div>
+      <div class="card-body">
+         <form #form="ngForm">
+            <div class="col-12 md:col-12">
+               <label for="username">Fecha de salida</label>
+               <p-calendar showButtonBar="true" inputId="fechaSalidaId" [showTime]="false" [showSeconds]="true"
+                   name="fechaSalida" placeholder="Seleccione ..." [(ngmodel)] = "reservation.checkIn"
+                   appendTo="body" styleClass="w-full" [showIcon]="true" dateFormat="yy/mm/dd" [readonlyInput]="false">
+               </p-calendar>
+            </div>
+
+         </form>
+
+      </div>
+   </div>
+</div>
+<!-- <p-accordion styleClass="uno">
+   <p-accordionTab header="Informacion de la habitacion" [(selected)]="toggleInputs" [transitionOptions]="'100ms'">
+
+
+   </p-accordionTab>
+</p-accordion> -->

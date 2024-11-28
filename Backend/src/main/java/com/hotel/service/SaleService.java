@@ -8,6 +8,8 @@ import com.hotel.repository.RoomRepository;
 import com.hotel.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,7 +20,7 @@ public class SaleService {
     private final ProductRepository productRepository;
     
     @Autowired
-    public SaleService(SaleRepository saleRepository) {
+    public SaleService(SaleRepository saleRepository, RoomRepository roomRepository, ProductRepository productRepository) {
         this.saleRepository = saleRepository;
         this.roomRepository = roomRepository;
         this.productRepository = productRepository;

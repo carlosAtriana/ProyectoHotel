@@ -2,7 +2,11 @@ package com.hotel.repository;
 
 import com.hotel.model.Sale;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface SaleRepository extends MongoRepository<Sale, String>{
